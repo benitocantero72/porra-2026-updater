@@ -258,7 +258,7 @@ async function main() {
       if (state.balonReal && p.balon && p.balon.toLowerCase() === state.balonReal.toLowerCase()) pts += 25;
       if (state.goleadorReal && p.goleador && p.goleador.toLowerCase() === state.goleadorReal.toLowerCase()) pts += 25;
       if (state.golesReal != null && p.golesBota != null && p.golesBota === state.golesReal) pts += 30;
-      ranking.push({ nombre: p.nick || p.nombre, pts, max: 2615 });
+      ranking.push({ nombre: p.nick || p.nombre, pts });
     });
     ranking.sort((a, b) => b.pts - a.pts);
     // Assign positions handling ties
@@ -330,7 +330,6 @@ async function enviarEmail(partido, resultadoStr, ranking) {
       const bold = ri < 3 ? 'font-weight:600;' : '';
       const ini = initials(p.nombre);
       const col = color(p.nombre);
-      const maxStr = p.max && p.max !== '?' ? p.max : '-';
       return `<tr style="background:${bg}">
         <td style="padding:5px 6px;text-align:center;font-size:12px;color:#888;white-space:nowrap;width:28px">${pos}</td>
         <td style="padding:5px 6px;white-space:nowrap">
@@ -340,7 +339,6 @@ async function enviarEmail(partido, resultadoStr, ranking) {
           </div>
         </td>
         <td style="padding:5px 6px;text-align:center;font-weight:600;color:#e8a020;font-size:13px;width:32px">${p.pts}</td>
-        <td style="padding:5px 6px;text-align:center;color:#bbb;font-size:11px;width:36px">${maxStr}</td>
       </tr>`;
     }).join('');
   }
@@ -351,7 +349,6 @@ async function enviarEmail(partido, resultadoStr, ranking) {
         <th style="padding:6px 8px;text-align:center;width:28px">#</th>
         <th style="padding:6px 8px;text-align:left">Participante</th>
         <th style="padding:6px 8px;text-align:center;width:32px">Pts</th>
-        <th style="padding:6px 8px;text-align:center;width:36px;color:#8ab4d8">Máx</th>
       </tr></thead>
       <tbody>${buildColHtml(start, end)}</tbody>
     </table>`;
