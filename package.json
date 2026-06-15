@@ -1,11 +1,7 @@
 {
   "name": "porra-2026-updater",
   "version": "1.0.0",
-  "description": "Actualizador automático de resultados del Mundial 2026",
   "main": "update.js",
-  "scripts": {
-    "update": "node update.js"
-  },
   "dependencies": {
     "firebase-admin": "^12.0.0",
     "nodemailer": "^6.9.0"
