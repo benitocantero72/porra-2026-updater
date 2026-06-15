@@ -1,9 +1,8 @@
 name: Actualizar resultados Porra 2026
 on:
   schedule:
-    - cron: '*/10 17-23 * * *'
-    - cron: '*/10 0-7 * * *'
-  workflow_dispatch: # lanzamiento manual
+    - cron: '*/10 * * * *'
+    workflow_dispatch: # lanzamiento manual
 jobs:
   update:
     runs-on: ubuntu-latest
