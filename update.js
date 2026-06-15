@@ -222,9 +222,148 @@ async function main() {
   if (updated > 0) {
     await db.collection('estado').doc('resultados').update({ resultados, cuadroReal });
     console.log(`\n✅ Firebase actualizado: ${updated} partido(s)`);
+
+    // Build ranking from updated data
+    const snapParts = await db.collection('participantes').get();
+    const ranking = [];
+    snapParts.forEach(doc => {
+      const p = doc.data();
+      // Simple pts count from resultados (groups only for now)
+      let pts = 0;
+      Object.keys(p.grupos || {}).forEach(k => {
+        const pr = p.grupos[k], r = resultados[k];
+        if (!pr || !r) return;
+        if (pr.l === r.l && pr.v === r.v) pts += 15;
+        else if (Math.sign(pr.l - pr.v) === Math.sign(r.l - r.v)) pts += 5;
+      });
+      ranking.push({ nombre: p.nick || p.nombre, pts, max: '?' });
+    });
+    ranking.sort((a, b) => b.pts - a.pts);
+
+    // Build result string from updated matches
+    const updatedMatch = pendingBatch.find(m => {
+      if (m.tipo === 'grupo') return resultados[m.key];
+      return cuadroReal[m.key] && cuadroReal[m.key].l != null;
+    });
+    let partidoLabel = '', resultadoStr = '';
+    if (updatedMatch) {
+      if (updatedMatch.tipo === 'grupo') {
+        partidoLabel = `${updatedMatch.loc} vs ${updatedMatch.vis}`;
+        const r = resultados[updatedMatch.key];
+        resultadoStr = `${r.l} - ${r.v}`;
+      } else {
+        const r = cuadroReal[updatedMatch.key];
+        partidoLabel = `${r.eqL} vs ${r.eqV}`;
+        resultadoStr = `${r.l} - ${r.v}`;
+      }
+    }
+
+    if (process.env.GMAIL_APP_PASSWORD && partidoLabel) {
+      try {
+        await enviarEmail(partidoLabel, resultadoStr, ranking);
+      } catch(e) {
+        console.error('⚠️ Error enviando email:', e.message);
+      }
+    }
   } else {
     console.log('\n⏰ Ningún partido del lote ha terminado aún.');
   }
 }
 
 main().catch(e => { console.error('❌ Error fatal:', e); process.exit(1); });
+
+// ── EMAIL ─────────────────────────────────────────────────────────────────────
+async function enviarEmail(partido, resultadoStr, ranking) {
+  const nodemailer = require('nodemailer');
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: 'benitocantero72@gmail.com', pass: process.env.GMAIL_APP_PASSWORD }
+  });
+
+  const N = ranking.length;
+  const perCol = Math.ceil(N / 3);
+
+  function initials(name) {
+    return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
+  }
+
+  const COLORS = ['#e74c3c','#3498db','#2ecc71','#9b59b6','#e67e22','#1abc9c','#f39c12','#e91e63','#00bcd4'];
+  function color(nombre) {
+    let h = 0; for (let c of nombre) h = (h*31 + c.charCodeAt(0)) & 0xffffff;
+    return COLORS[Math.abs(h) % COLORS.length];
+  }
+
+  function buildColHtml(start, end) {
+    return ranking.slice(start, end).map((p, i) => {
+      const ri = start + i;
+      const bg = ri % 2 === 0 ? '#f8f9fa' : '#ffffff';
+      const pos = ri === 0 ? '🥇' : ri === 1 ? '🥈' : ri === 2 ? '🥉' : `${p.pos}`;
+      const bold = ri < 3 ? 'font-weight:600;' : '';
+      const ini = initials(p.nombre);
+      const col = color(p.nombre);
+      return `<tr style="background:${bg}">
+        <td style="padding:5px 6px;text-align:center;font-size:12px;color:#888">${pos}</td>
+        <td style="padding:5px 6px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <div style="width:22px;height:22px;border-radius:50%;background:${col};display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:600;flex-shrink:0">${ini}</div>
+            <span style="font-size:11px;${bold}">${p.nombre}</span>
+          </div>
+        </td>
+        <td style="padding:5px 6px;text-align:center;font-weight:600;color:#e8a020;font-size:13px">${p.pts}</td>
+        <td style="padding:5px 6px;text-align:center;color:#bbb;font-size:11px">${p.max}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function colTable(start, end) {
+    return `<table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="background:#1E3A5F;color:#fff">
+        <th style="padding:6px 8px;text-align:center;width:28px">#</th>
+        <th style="padding:6px 8px;text-align:left">Participante</th>
+        <th style="padding:6px 8px;text-align:center;width:36px">Pts</th>
+        <th style="padding:6px 8px;text-align:center;width:36px;color:#8ab4d8">Máx</th>
+      </tr></thead>
+      <tbody>${buildColHtml(start, end)}</tbody>
+    </table>`;
+  }
+
+  const fecha = new Date().toLocaleString('es-ES', {timeZone:'Europe/Madrid'});
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
+<body style="font-family:Arial,sans-serif;background:#f0f2f5;margin:0;padding:20px">
+<div style="max-width:800px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0">
+  <div style="background:#1E3A5F;padding:18px 20px;text-align:center">
+    <div style="color:#e8a020;font-size:20px;font-weight:600">Porra Mundial 2026</div>
+    <div style="color:#8ab4d8;font-size:13px;margin-top:4px">Clasificación actualizada</div>
+  </div>
+  <div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:14px 20px">
+    <div style="font-size:12px;color:#555;margin-bottom:2px">Resultado del partido:</div>
+    <div style="font-size:16px;font-weight:600;color:#1E3A5F">${partido}</div>
+    <div style="font-size:28px;font-weight:600;color:#2e7d32;margin-top:2px">${resultadoStr}</div>
+  </div>
+  <div style="padding:16px 20px">
+    <div style="font-size:13px;color:#888;margin-bottom:10px">Clasificación completa (${N} participantes)</div>
+    <table style="width:100%;border-collapse:collapse">
+      <tr>
+        <td style="width:33%;vertical-align:top;padding-right:4px">${colTable(0, perCol)}</td>
+        <td style="width:33%;vertical-align:top;padding:0 4px">${colTable(perCol, perCol*2)}</td>
+        <td style="width:33%;vertical-align:top;padding-left:4px">${colTable(perCol*2, N)}</td>
+      </tr>
+    </table>
+  </div>
+  <div style="background:#f8f9fa;padding:10px 20px;text-align:center;border-top:1px solid #eee">
+    <div style="color:#aaa;font-size:11px">Actualizado automáticamente · ${fecha}</div>
+  </div>
+</div>
+</body></html>`;
+
+  await transporter.sendMail({
+    from: '"Porra 2026 ⚽" <benitocantero72@gmail.com>',
+    to: 'benitocantero72@gmail.com',
+    subject: `⚽ ${partido} | ${resultadoStr} — Porra 2026`,
+    html,
+  });
+  console.log('📧 Email enviado a benitocantero72@gmail.com');
+}
+
+
