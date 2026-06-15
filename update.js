@@ -360,21 +360,17 @@ async function enviarEmail(partido, resultadoStr, ranking) {
   const fecha = new Date().toLocaleString('es-ES', {timeZone:'Europe/Madrid'});
 
   const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
-<body style="font-family:Arial,sans-serif;background:#f0f2f5;margin:0;padding:20px">
-<div style="max-width:820px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0">
-  <div style="background:#1E3A5F;padding:18px 20px;text-align:center">
-    <div style="color:#e8a020;font-size:20px;font-weight:600">Porra Mundial 2026</div>
-    <div style="color:#8ab4d8;font-size:13px;margin-top:4px">Clasificación actualizada</div>
+<body style="font-family:Arial,sans-serif;background:#f0f2f5;margin:0;padding:12px">
+<div style="max-width:820px;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;border:1px solid #ddd">
+  <div style="background:#1E3A5F;padding:6px 14px;display:flex;align-items:center;justify-content:space-between">
+    <span style="color:#e8a020;font-size:13px;font-weight:600">Porra Mundial 2026</span>
+    <span style="color:#8ab4d8;font-size:11px">${fecha}</span>
   </div>
-  <div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:12px 20px;display:flex;align-items:center;gap:16px">
-    <div>
-      <div style="font-size:12px;color:#555;margin-bottom:2px">Resultado del partido:</div>
-      <div style="font-size:16px;font-weight:600;color:#1E3A5F">${partido}</div>
-    </div>
-    <div style="font-size:22px;font-weight:700;color:#2e7d32;white-space:nowrap">${resultadoStr}</div>
+  <div style="background:#e8f5e9;border-left:3px solid #2e7d32;padding:6px 14px;display:flex;align-items:center;gap:14px">
+    <span style="font-size:13px;font-weight:600;color:#1E3A5F">${partido}</span>
+    <span style="font-size:15px;font-weight:700;color:#2e7d32;white-space:nowrap">${resultadoStr}</span>
   </div>
-  <div style="padding:14px 16px">
-    <div style="font-size:12px;color:#888;margin-bottom:8px">Clasificación completa (${N} participantes)</div>
+  <div style="padding:10px 10px 12px">
     <table style="width:100%;border-collapse:collapse">
       <tr>
         <td style="width:33%;vertical-align:top;padding-right:3px">${colTable(0, perCol)}</td>
@@ -382,9 +378,6 @@ async function enviarEmail(partido, resultadoStr, ranking) {
         <td style="width:33%;vertical-align:top;padding-left:3px">${colTable(perCol*2, N)}</td>
       </tr>
     </table>
-  </div>
-  <div style="background:#f8f9fa;padding:8px 20px;text-align:center;border-top:1px solid #eee">
-    <div style="color:#aaa;font-size:11px">Actualizado automáticamente · ${fecha}</div>
   </div>
 </div>
 </body></html>`;
