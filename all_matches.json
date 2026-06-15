@@ -1,0 +1,978 @@
+[
+  {
+    "sort": "2026-06-11T21:00",
+    "fecha": "11/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "A",
+    "loc": "Mexico",
+    "vis": "Sudafrica",
+    "key": "A_Mexico_Sudafrica"
+  },
+  {
+    "sort": "2026-06-12T04:00",
+    "fecha": "12/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "A",
+    "loc": "Corea del Sur",
+    "vis": "Rep. Checa",
+    "key": "A_Corea_del_Sur_Rep._Checa"
+  },
+  {
+    "sort": "2026-06-12T21:00",
+    "fecha": "12/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "B",
+    "loc": "Canada",
+    "vis": "Bosnia-Herz.",
+    "key": "B_Canada_Bosnia-Herz."
+  },
+  {
+    "sort": "2026-06-13T03:00",
+    "fecha": "13/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "D",
+    "loc": "Estados Unidos",
+    "vis": "Paraguay",
+    "key": "D_Estados_Unidos_Paraguay"
+  },
+  {
+    "sort": "2026-06-13T21:00",
+    "fecha": "13/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "B",
+    "loc": "Qatar",
+    "vis": "Suiza",
+    "key": "B_Qatar_Suiza"
+  },
+  {
+    "sort": "2026-06-14T00:00",
+    "fecha": "14/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "C",
+    "loc": "Brasil",
+    "vis": "Marruecos",
+    "key": "C_Brasil_Marruecos"
+  },
+  {
+    "sort": "2026-06-14T03:00",
+    "fecha": "14/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "C",
+    "loc": "Haiti",
+    "vis": "Escocia",
+    "key": "C_Haiti_Escocia"
+  },
+  {
+    "sort": "2026-06-14T06:00",
+    "fecha": "14/06",
+    "hora": "06:00",
+    "tipo": "grupo",
+    "g": "D",
+    "loc": "Australia",
+    "vis": "Turquia",
+    "key": "D_Australia_Turquia"
+  },
+  {
+    "sort": "2026-06-14T19:00",
+    "fecha": "14/06",
+    "hora": "19:00",
+    "tipo": "grupo",
+    "g": "E",
+    "loc": "Alemania",
+    "vis": "Curazao",
+    "key": "E_Alemania_Curazao"
+  },
+  {
+    "sort": "2026-06-14T22:00",
+    "fecha": "14/06",
+    "hora": "22:00",
+    "tipo": "grupo",
+    "g": "F",
+    "loc": "Paises Bajos",
+    "vis": "Japon",
+    "key": "F_Paises_Bajos_Japon"
+  },
+  {
+    "sort": "2026-06-15T01:00",
+    "fecha": "15/06",
+    "hora": "01:00",
+    "tipo": "grupo",
+    "g": "E",
+    "loc": "Costa de Marfil",
+    "vis": "Ecuador",
+    "key": "E_Costa_de_Marfil_Ecuador"
+  },
+  {
+    "sort": "2026-06-15T04:00",
+    "fecha": "15/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "F",
+    "loc": "Suecia",
+    "vis": "Tunez",
+    "key": "F_Suecia_Tunez"
+  },
+  {
+    "sort": "2026-06-15T18:00",
+    "fecha": "15/06",
+    "hora": "18:00",
+    "tipo": "grupo",
+    "g": "H",
+    "loc": "Espana",
+    "vis": "Cabo Verde",
+    "key": "H_Espana_Cabo_Verde"
+  },
+  {
+    "sort": "2026-06-15T21:00",
+    "fecha": "15/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "G",
+    "loc": "Belgica",
+    "vis": "Egipto",
+    "key": "G_Belgica_Egipto"
+  },
+  {
+    "sort": "2026-06-16T00:00",
+    "fecha": "16/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "H",
+    "loc": "Arabia Saudi",
+    "vis": "Uruguay",
+    "key": "H_Arabia_Saudi_Uruguay"
+  },
+  {
+    "sort": "2026-06-16T03:00",
+    "fecha": "16/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "G",
+    "loc": "Iran",
+    "vis": "Nueva Zelanda",
+    "key": "G_Iran_Nueva_Zelanda"
+  },
+  {
+    "sort": "2026-06-16T21:00",
+    "fecha": "16/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "I",
+    "loc": "Francia",
+    "vis": "Senegal",
+    "key": "I_Francia_Senegal"
+  },
+  {
+    "sort": "2026-06-17T00:00",
+    "fecha": "17/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "I",
+    "loc": "Irak",
+    "vis": "Noruega",
+    "key": "I_Irak_Noruega"
+  },
+  {
+    "sort": "2026-06-17T03:00",
+    "fecha": "17/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "J",
+    "loc": "Argentina",
+    "vis": "Argelia",
+    "key": "J_Argentina_Argelia"
+  },
+  {
+    "sort": "2026-06-17T06:00",
+    "fecha": "17/06",
+    "hora": "06:00",
+    "tipo": "grupo",
+    "g": "J",
+    "loc": "Austria",
+    "vis": "Jordania",
+    "key": "J_Austria_Jordania"
+  },
+  {
+    "sort": "2026-06-17T19:00",
+    "fecha": "17/06",
+    "hora": "19:00",
+    "tipo": "grupo",
+    "g": "K",
+    "loc": "Portugal",
+    "vis": "RD Congo",
+    "key": "K_Portugal_RD_Congo"
+  },
+  {
+    "sort": "2026-06-17T22:00",
+    "fecha": "17/06",
+    "hora": "22:00",
+    "tipo": "grupo",
+    "g": "L",
+    "loc": "Inglaterra",
+    "vis": "Croacia",
+    "key": "L_Inglaterra_Croacia"
+  },
+  {
+    "sort": "2026-06-18T01:00",
+    "fecha": "18/06",
+    "hora": "01:00",
+    "tipo": "grupo",
+    "g": "L",
+    "loc": "Ghana",
+    "vis": "Panama",
+    "key": "L_Ghana_Panama"
+  },
+  {
+    "sort": "2026-06-18T04:00",
+    "fecha": "18/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "K",
+    "loc": "Uzbekistan",
+    "vis": "Colombia",
+    "key": "K_Uzbekistan_Colombia"
+  },
+  {
+    "sort": "2026-06-18T18:00",
+    "fecha": "18/06",
+    "hora": "18:00",
+    "tipo": "grupo",
+    "g": "A",
+    "loc": "Rep. Checa",
+    "vis": "Sudafrica",
+    "key": "A_Sudafrica_Rep._Checa"
+  },
+  {
+    "sort": "2026-06-18T21:00",
+    "fecha": "18/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "B",
+    "loc": "Suiza",
+    "vis": "Bosnia-Herz.",
+    "key": "B_Bosnia-Herz._Suiza"
+  },
+  {
+    "sort": "2026-06-19T00:00",
+    "fecha": "19/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "B",
+    "loc": "Canada",
+    "vis": "Qatar",
+    "key": "B_Canada_Qatar"
+  },
+  {
+    "sort": "2026-06-19T03:00",
+    "fecha": "19/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "A",
+    "loc": "Mexico",
+    "vis": "Corea del Sur",
+    "key": "A_Mexico_Corea_del_Sur"
+  },
+  {
+    "sort": "2026-06-19T21:00",
+    "fecha": "19/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "D",
+    "loc": "Estados Unidos",
+    "vis": "Australia",
+    "key": "D_Estados_Unidos_Australia"
+  },
+  {
+    "sort": "2026-06-20T00:00",
+    "fecha": "20/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "C",
+    "loc": "Escocia",
+    "vis": "Marruecos",
+    "key": "C_Marruecos_Escocia"
+  },
+  {
+    "sort": "2026-06-20T03:00",
+    "fecha": "20/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "C",
+    "loc": "Brasil",
+    "vis": "Haiti",
+    "key": "C_Brasil_Haiti"
+  },
+  {
+    "sort": "2026-06-20T06:00",
+    "fecha": "20/06",
+    "hora": "06:00",
+    "tipo": "grupo",
+    "g": "D",
+    "loc": "Turquia",
+    "vis": "Paraguay",
+    "key": "D_Paraguay_Turquia"
+  },
+  {
+    "sort": "2026-06-20T19:00",
+    "fecha": "20/06",
+    "hora": "19:00",
+    "tipo": "grupo",
+    "g": "F",
+    "loc": "Paises Bajos",
+    "vis": "Suecia",
+    "key": "F_Paises_Bajos_Suecia"
+  },
+  {
+    "sort": "2026-06-20T22:00",
+    "fecha": "20/06",
+    "hora": "22:00",
+    "tipo": "grupo",
+    "g": "E",
+    "loc": "Alemania",
+    "vis": "Costa de Marfil",
+    "key": "E_Alemania_Costa_de_Marfil"
+  },
+  {
+    "sort": "2026-06-21T02:00",
+    "fecha": "21/06",
+    "hora": "02:00",
+    "tipo": "grupo",
+    "g": "E",
+    "loc": "Ecuador",
+    "vis": "Curazao",
+    "key": "E_Curazao_Ecuador"
+  },
+  {
+    "sort": "2026-06-21T06:00",
+    "fecha": "21/06",
+    "hora": "06:00",
+    "tipo": "grupo",
+    "g": "F",
+    "loc": "Tunez",
+    "vis": "Japon",
+    "key": "F_Japon_Tunez"
+  },
+  {
+    "sort": "2026-06-21T18:00",
+    "fecha": "21/06",
+    "hora": "18:00",
+    "tipo": "grupo",
+    "g": "H",
+    "loc": "Espana",
+    "vis": "Arabia Saudi",
+    "key": "H_Espana_Arabia_Saudi"
+  },
+  {
+    "sort": "2026-06-21T21:00",
+    "fecha": "21/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "G",
+    "loc": "Belgica",
+    "vis": "Iran",
+    "key": "G_Belgica_Iran"
+  },
+  {
+    "sort": "2026-06-22T00:00",
+    "fecha": "22/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "H",
+    "loc": "Uruguay",
+    "vis": "Cabo Verde",
+    "key": "H_Cabo_Verde_Uruguay"
+  },
+  {
+    "sort": "2026-06-22T03:00",
+    "fecha": "22/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "G",
+    "loc": "Nueva Zelanda",
+    "vis": "Egipto",
+    "key": "G_Egipto_Nueva_Zelanda"
+  },
+  {
+    "sort": "2026-06-22T19:00",
+    "fecha": "22/06",
+    "hora": "19:00",
+    "tipo": "grupo",
+    "g": "J",
+    "loc": "Argentina",
+    "vis": "Austria",
+    "key": "J_Argentina_Austria"
+  },
+  {
+    "sort": "2026-06-22T23:00",
+    "fecha": "22/06",
+    "hora": "23:00",
+    "tipo": "grupo",
+    "g": "I",
+    "loc": "Francia",
+    "vis": "Irak",
+    "key": "I_Francia_Irak"
+  },
+  {
+    "sort": "2026-06-23T02:00",
+    "fecha": "23/06",
+    "hora": "02:00",
+    "tipo": "grupo",
+    "g": "I",
+    "loc": "Noruega",
+    "vis": "Senegal",
+    "key": "I_Senegal_Noruega"
+  },
+  {
+    "sort": "2026-06-23T05:00",
+    "fecha": "23/06",
+    "hora": "05:00",
+    "tipo": "grupo",
+    "g": "J",
+    "loc": "Jordania",
+    "vis": "Argelia",
+    "key": "J_Argelia_Jordania"
+  },
+  {
+    "sort": "2026-06-23T19:00",
+    "fecha": "23/06",
+    "hora": "19:00",
+    "tipo": "grupo",
+    "g": "K",
+    "loc": "Portugal",
+    "vis": "Uzbekistan",
+    "key": "K_Portugal_Uzbekistan"
+  },
+  {
+    "sort": "2026-06-23T22:00",
+    "fecha": "23/06",
+    "hora": "22:00",
+    "tipo": "grupo",
+    "g": "L",
+    "loc": "Inglaterra",
+    "vis": "Ghana",
+    "key": "L_Inglaterra_Ghana"
+  },
+  {
+    "sort": "2026-06-24T01:00",
+    "fecha": "24/06",
+    "hora": "01:00",
+    "tipo": "grupo",
+    "g": "L",
+    "loc": "Panama",
+    "vis": "Croacia",
+    "key": "L_Croacia_Panama"
+  },
+  {
+    "sort": "2026-06-24T04:00",
+    "fecha": "24/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "K",
+    "loc": "Colombia",
+    "vis": "RD Congo",
+    "key": "K_RD_Congo_Colombia"
+  },
+  {
+    "sort": "2026-06-24T21:00",
+    "fecha": "24/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "B",
+    "loc": "Suiza",
+    "vis": "Canada",
+    "key": "B_Canada_Suiza"
+  },
+  {
+    "sort": "2026-06-24T21:00",
+    "fecha": "24/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "B",
+    "loc": "Bosnia-Herz.",
+    "vis": "Qatar",
+    "key": "B_Bosnia-Herz._Qatar"
+  },
+  {
+    "sort": "2026-06-25T00:00",
+    "fecha": "25/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "C",
+    "loc": "Escocia",
+    "vis": "Brasil",
+    "key": "C_Brasil_Escocia"
+  },
+  {
+    "sort": "2026-06-25T00:00",
+    "fecha": "25/06",
+    "hora": "00:00",
+    "tipo": "grupo",
+    "g": "C",
+    "loc": "Marruecos",
+    "vis": "Haiti",
+    "key": "C_Marruecos_Haiti"
+  },
+  {
+    "sort": "2026-06-25T03:00",
+    "fecha": "25/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "A",
+    "loc": "Rep. Checa",
+    "vis": "Mexico",
+    "key": "A_Mexico_Rep._Checa"
+  },
+  {
+    "sort": "2026-06-25T03:00",
+    "fecha": "25/06",
+    "hora": "03:00",
+    "tipo": "grupo",
+    "g": "A",
+    "loc": "Sudafrica",
+    "vis": "Corea del Sur",
+    "key": "A_Sudafrica_Corea_del_Sur"
+  },
+  {
+    "sort": "2026-06-25T22:00",
+    "fecha": "25/06",
+    "hora": "22:00",
+    "tipo": "grupo",
+    "g": "E",
+    "loc": "Curazao",
+    "vis": "Costa de Marfil",
+    "key": "E_Curazao_Costa_de_Marfil"
+  },
+  {
+    "sort": "2026-06-25T22:00",
+    "fecha": "25/06",
+    "hora": "22:00",
+    "tipo": "grupo",
+    "g": "E",
+    "loc": "Ecuador",
+    "vis": "Alemania",
+    "key": "E_Alemania_Ecuador"
+  },
+  {
+    "sort": "2026-06-26T01:00",
+    "fecha": "26/06",
+    "hora": "01:00",
+    "tipo": "grupo",
+    "g": "F",
+    "loc": "Japon",
+    "vis": "Suecia",
+    "key": "F_Japon_Suecia"
+  },
+  {
+    "sort": "2026-06-26T01:00",
+    "fecha": "26/06",
+    "hora": "01:00",
+    "tipo": "grupo",
+    "g": "F",
+    "loc": "Tunez",
+    "vis": "Paises Bajos",
+    "key": "F_Paises_Bajos_Tunez"
+  },
+  {
+    "sort": "2026-06-26T04:00",
+    "fecha": "26/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "D",
+    "loc": "Turquia",
+    "vis": "Estados Unidos",
+    "key": "D_Estados_Unidos_Turquia"
+  },
+  {
+    "sort": "2026-06-26T04:00",
+    "fecha": "26/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "D",
+    "loc": "Paraguay",
+    "vis": "Australia",
+    "key": "D_Paraguay_Australia"
+  },
+  {
+    "sort": "2026-06-26T21:00",
+    "fecha": "26/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "I",
+    "loc": "Noruega",
+    "vis": "Francia",
+    "key": "I_Francia_Noruega"
+  },
+  {
+    "sort": "2026-06-26T21:00",
+    "fecha": "26/06",
+    "hora": "21:00",
+    "tipo": "grupo",
+    "g": "I",
+    "loc": "Senegal",
+    "vis": "Irak",
+    "key": "I_Senegal_Irak"
+  },
+  {
+    "sort": "2026-06-27T02:00",
+    "fecha": "27/06",
+    "hora": "02:00",
+    "tipo": "grupo",
+    "g": "H",
+    "loc": "Cabo Verde",
+    "vis": "Arabia Saudi",
+    "key": "H_Cabo_Verde_Arabia_Saudi"
+  },
+  {
+    "sort": "2026-06-27T02:00",
+    "fecha": "27/06",
+    "hora": "02:00",
+    "tipo": "grupo",
+    "g": "H",
+    "loc": "Uruguay",
+    "vis": "Espana",
+    "key": "H_Espana_Uruguay"
+  },
+  {
+    "sort": "2026-06-27T05:00",
+    "fecha": "27/06",
+    "hora": "05:00",
+    "tipo": "grupo",
+    "g": "G",
+    "loc": "Egipto",
+    "vis": "Iran",
+    "key": "G_Egipto_Iran"
+  },
+  {
+    "sort": "2026-06-27T05:00",
+    "fecha": "27/06",
+    "hora": "05:00",
+    "tipo": "grupo",
+    "g": "G",
+    "loc": "Nueva Zelanda",
+    "vis": "Belgica",
+    "key": "G_Belgica_Nueva_Zelanda"
+  },
+  {
+    "sort": "2026-06-27T23:00",
+    "fecha": "27/06",
+    "hora": "23:00",
+    "tipo": "grupo",
+    "g": "L",
+    "loc": "Panama",
+    "vis": "Inglaterra",
+    "key": "L_Inglaterra_Panama"
+  },
+  {
+    "sort": "2026-06-27T23:00",
+    "fecha": "27/06",
+    "hora": "23:00",
+    "tipo": "grupo",
+    "g": "L",
+    "loc": "Croacia",
+    "vis": "Ghana",
+    "key": "L_Croacia_Ghana"
+  },
+  {
+    "sort": "2026-06-28T01:30",
+    "fecha": "28/06",
+    "hora": "01:30",
+    "tipo": "grupo",
+    "g": "K",
+    "loc": "Colombia",
+    "vis": "Portugal",
+    "key": "K_Portugal_Colombia"
+  },
+  {
+    "sort": "2026-06-28T01:30",
+    "fecha": "28/06",
+    "hora": "01:30",
+    "tipo": "grupo",
+    "g": "K",
+    "loc": "RD Congo",
+    "vis": "Uzbekistan",
+    "key": "K_RD_Congo_Uzbekistan"
+  },
+  {
+    "sort": "2026-06-28T04:00",
+    "fecha": "28/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "J",
+    "loc": "Argelia",
+    "vis": "Austria",
+    "key": "J_Argelia_Austria"
+  },
+  {
+    "sort": "2026-06-28T04:00",
+    "fecha": "28/06",
+    "hora": "04:00",
+    "tipo": "grupo",
+    "g": "J",
+    "loc": "Jordania",
+    "vis": "Argentina",
+    "key": "J_Argentina_Jordania"
+  },
+  {
+    "sort": "2026-06-28T21:00",
+    "fecha": "28/06",
+    "hora": "21:00",
+    "tipo": "elim",
+    "rid": "d16_d01",
+    "key": "d16_d01"
+  },
+  {
+    "sort": "2026-06-29T19:00",
+    "fecha": "29/06",
+    "hora": "19:00",
+    "tipo": "elim",
+    "rid": "d16_d04",
+    "key": "d16_d04"
+  },
+  {
+    "sort": "2026-06-29T22:30",
+    "fecha": "29/06",
+    "hora": "22:30",
+    "tipo": "elim",
+    "rid": "d16_d02",
+    "key": "d16_d02"
+  },
+  {
+    "sort": "2026-06-30T03:00",
+    "fecha": "30/06",
+    "hora": "03:00",
+    "tipo": "elim",
+    "rid": "d16_d03",
+    "key": "d16_d03"
+  },
+  {
+    "sort": "2026-06-30T19:00",
+    "fecha": "30/06",
+    "hora": "19:00",
+    "tipo": "elim",
+    "rid": "d16_d06",
+    "key": "d16_d06"
+  },
+  {
+    "sort": "2026-06-30T23:00",
+    "fecha": "30/06",
+    "hora": "23:00",
+    "tipo": "elim",
+    "rid": "d16_d05",
+    "key": "d16_d05"
+  },
+  {
+    "sort": "2026-07-01T03:00",
+    "fecha": "01/07",
+    "hora": "03:00",
+    "tipo": "elim",
+    "rid": "d16_d07",
+    "key": "d16_d07"
+  },
+  {
+    "sort": "2026-07-01T18:00",
+    "fecha": "01/07",
+    "hora": "18:00",
+    "tipo": "elim",
+    "rid": "d16_d08",
+    "key": "d16_d08"
+  },
+  {
+    "sort": "2026-07-01T22:00",
+    "fecha": "01/07",
+    "hora": "22:00",
+    "tipo": "elim",
+    "rid": "d16_d10",
+    "key": "d16_d10"
+  },
+  {
+    "sort": "2026-07-02T02:00",
+    "fecha": "02/07",
+    "hora": "02:00",
+    "tipo": "elim",
+    "rid": "d16_d09",
+    "key": "d16_d09"
+  },
+  {
+    "sort": "2026-07-02T21:00",
+    "fecha": "02/07",
+    "hora": "21:00",
+    "tipo": "elim",
+    "rid": "d16_d12",
+    "key": "d16_d12"
+  },
+  {
+    "sort": "2026-07-03T01:00",
+    "fecha": "03/07",
+    "hora": "01:00",
+    "tipo": "elim",
+    "rid": "d16_d11",
+    "key": "d16_d11"
+  },
+  {
+    "sort": "2026-07-03T05:00",
+    "fecha": "03/07",
+    "hora": "05:00",
+    "tipo": "elim",
+    "rid": "d16_d13",
+    "key": "d16_d13"
+  },
+  {
+    "sort": "2026-07-03T20:00",
+    "fecha": "03/07",
+    "hora": "20:00",
+    "tipo": "elim",
+    "rid": "d16_d16",
+    "key": "d16_d16"
+  },
+  {
+    "sort": "2026-07-04T00:00",
+    "fecha": "04/07",
+    "hora": "00:00",
+    "tipo": "elim",
+    "rid": "d16_d14",
+    "key": "d16_d14"
+  },
+  {
+    "sort": "2026-07-04T03:30",
+    "fecha": "04/07",
+    "hora": "03:30",
+    "tipo": "elim",
+    "rid": "d16_d15",
+    "key": "d16_d15"
+  },
+  {
+    "sort": "2026-07-04T19:00",
+    "fecha": "04/07",
+    "hora": "19:00",
+    "tipo": "elim",
+    "rid": "oct_o01",
+    "key": "oct_o01"
+  },
+  {
+    "sort": "2026-07-04T23:00",
+    "fecha": "04/07",
+    "hora": "23:00",
+    "tipo": "elim",
+    "rid": "oct_o02",
+    "key": "oct_o02"
+  },
+  {
+    "sort": "2026-07-05T22:00",
+    "fecha": "05/07",
+    "hora": "22:00",
+    "tipo": "elim",
+    "rid": "oct_o03",
+    "key": "oct_o03"
+  },
+  {
+    "sort": "2026-07-06T02:00",
+    "fecha": "06/07",
+    "hora": "02:00",
+    "tipo": "elim",
+    "rid": "oct_o04",
+    "key": "oct_o04"
+  },
+  {
+    "sort": "2026-07-06T21:00",
+    "fecha": "06/07",
+    "hora": "21:00",
+    "tipo": "elim",
+    "rid": "oct_o05",
+    "key": "oct_o05"
+  },
+  {
+    "sort": "2026-07-07T02:00",
+    "fecha": "07/07",
+    "hora": "02:00",
+    "tipo": "elim",
+    "rid": "oct_o06",
+    "key": "oct_o06"
+  },
+  {
+    "sort": "2026-07-07T18:00",
+    "fecha": "07/07",
+    "hora": "18:00",
+    "tipo": "elim",
+    "rid": "oct_o07",
+    "key": "oct_o07"
+  },
+  {
+    "sort": "2026-07-07T22:00",
+    "fecha": "07/07",
+    "hora": "22:00",
+    "tipo": "elim",
+    "rid": "oct_o08",
+    "key": "oct_o08"
+  },
+  {
+    "sort": "2026-07-09T22:00",
+    "fecha": "09/07",
+    "hora": "22:00",
+    "tipo": "elim",
+    "rid": "qrt_q01",
+    "key": "qrt_q01"
+  },
+  {
+    "sort": "2026-07-10T02:00",
+    "fecha": "10/07",
+    "hora": "02:00",
+    "tipo": "elim",
+    "rid": "qrt_q02",
+    "key": "qrt_q02"
+  },
+  {
+    "sort": "2026-07-11T23:00",
+    "fecha": "11/07",
+    "hora": "23:00",
+    "tipo": "elim",
+    "rid": "qrt_q03",
+    "key": "qrt_q03"
+  },
+  {
+    "sort": "2026-07-12T03:00",
+    "fecha": "12/07",
+    "hora": "03:00",
+    "tipo": "elim",
+    "rid": "qrt_q04",
+    "key": "qrt_q04"
+  },
+  {
+    "sort": "2026-07-14T21:00",
+    "fecha": "14/07",
+    "hora": "21:00",
+    "tipo": "elim",
+    "rid": "sem_s01",
+    "key": "sem_s01"
+  },
+  {
+    "sort": "2026-07-15T21:00",
+    "fecha": "15/07",
+    "hora": "21:00",
+    "tipo": "elim",
+    "rid": "sem_s02",
+    "key": "sem_s02"
+  },
+  {
+    "sort": "2026-07-18T23:00",
+    "fecha": "18/07",
+    "hora": "23:00",
+    "tipo": "elim",
+    "rid": "ter_t01",
+    "key": "ter_t01"
+  },
+  {
+    "sort": "2026-07-19T21:00",
+    "fecha": "19/07",
+    "hora": "21:00",
+    "tipo": "elim",
+    "rid": "fin_f01",
+    "key": "fin_f01"
+  }
+]

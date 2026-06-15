@@ -1,0 +1,510 @@
+{
+  "groupKeys": {
+    "A_Mexico_Sudafrica": {
+      "g": "A",
+      "loc": "Mexico",
+      "vis": "Sudafrica"
+    },
+    "A_Mexico_Corea_del_Sur": {
+      "g": "A",
+      "loc": "Mexico",
+      "vis": "Corea del Sur"
+    },
+    "A_Mexico_Rep._Checa": {
+      "g": "A",
+      "loc": "Mexico",
+      "vis": "Rep. Checa"
+    },
+    "A_Sudafrica_Corea_del_Sur": {
+      "g": "A",
+      "loc": "Sudafrica",
+      "vis": "Corea del Sur"
+    },
+    "A_Sudafrica_Rep._Checa": {
+      "g": "A",
+      "loc": "Sudafrica",
+      "vis": "Rep. Checa"
+    },
+    "A_Corea_del_Sur_Rep._Checa": {
+      "g": "A",
+      "loc": "Corea del Sur",
+      "vis": "Rep. Checa"
+    },
+    "B_Canada_Bosnia-Herz.": {
+      "g": "B",
+      "loc": "Canada",
+      "vis": "Bosnia-Herz."
+    },
+    "B_Canada_Qatar": {
+      "g": "B",
+      "loc": "Canada",
+      "vis": "Qatar"
+    },
+    "B_Canada_Suiza": {
+      "g": "B",
+      "loc": "Canada",
+      "vis": "Suiza"
+    },
+    "B_Bosnia-Herz._Qatar": {
+      "g": "B",
+      "loc": "Bosnia-Herz.",
+      "vis": "Qatar"
+    },
+    "B_Bosnia-Herz._Suiza": {
+      "g": "B",
+      "loc": "Bosnia-Herz.",
+      "vis": "Suiza"
+    },
+    "B_Qatar_Suiza": {
+      "g": "B",
+      "loc": "Qatar",
+      "vis": "Suiza"
+    },
+    "C_Brasil_Marruecos": {
+      "g": "C",
+      "loc": "Brasil",
+      "vis": "Marruecos"
+    },
+    "C_Brasil_Haiti": {
+      "g": "C",
+      "loc": "Brasil",
+      "vis": "Haiti"
+    },
+    "C_Brasil_Escocia": {
+      "g": "C",
+      "loc": "Brasil",
+      "vis": "Escocia"
+    },
+    "C_Marruecos_Haiti": {
+      "g": "C",
+      "loc": "Marruecos",
+      "vis": "Haiti"
+    },
+    "C_Marruecos_Escocia": {
+      "g": "C",
+      "loc": "Marruecos",
+      "vis": "Escocia"
+    },
+    "C_Haiti_Escocia": {
+      "g": "C",
+      "loc": "Haiti",
+      "vis": "Escocia"
+    },
+    "D_Estados_Unidos_Paraguay": {
+      "g": "D",
+      "loc": "Estados Unidos",
+      "vis": "Paraguay"
+    },
+    "D_Estados_Unidos_Australia": {
+      "g": "D",
+      "loc": "Estados Unidos",
+      "vis": "Australia"
+    },
+    "D_Estados_Unidos_Turquia": {
+      "g": "D",
+      "loc": "Estados Unidos",
+      "vis": "Turquia"
+    },
+    "D_Paraguay_Australia": {
+      "g": "D",
+      "loc": "Paraguay",
+      "vis": "Australia"
+    },
+    "D_Paraguay_Turquia": {
+      "g": "D",
+      "loc": "Paraguay",
+      "vis": "Turquia"
+    },
+    "D_Australia_Turquia": {
+      "g": "D",
+      "loc": "Australia",
+      "vis": "Turquia"
+    },
+    "E_Alemania_Curazao": {
+      "g": "E",
+      "loc": "Alemania",
+      "vis": "Curazao"
+    },
+    "E_Alemania_Costa_de_Marfil": {
+      "g": "E",
+      "loc": "Alemania",
+      "vis": "Costa de Marfil"
+    },
+    "E_Alemania_Ecuador": {
+      "g": "E",
+      "loc": "Alemania",
+      "vis": "Ecuador"
+    },
+    "E_Curazao_Costa_de_Marfil": {
+      "g": "E",
+      "loc": "Curazao",
+      "vis": "Costa de Marfil"
+    },
+    "E_Curazao_Ecuador": {
+      "g": "E",
+      "loc": "Curazao",
+      "vis": "Ecuador"
+    },
+    "E_Costa_de_Marfil_Ecuador": {
+      "g": "E",
+      "loc": "Costa de Marfil",
+      "vis": "Ecuador"
+    },
+    "F_Paises_Bajos_Japon": {
+      "g": "F",
+      "loc": "Paises Bajos",
+      "vis": "Japon"
+    },
+    "F_Paises_Bajos_Suecia": {
+      "g": "F",
+      "loc": "Paises Bajos",
+      "vis": "Suecia"
+    },
+    "F_Paises_Bajos_Tunez": {
+      "g": "F",
+      "loc": "Paises Bajos",
+      "vis": "Tunez"
+    },
+    "F_Japon_Suecia": {
+      "g": "F",
+      "loc": "Japon",
+      "vis": "Suecia"
+    },
+    "F_Japon_Tunez": {
+      "g": "F",
+      "loc": "Japon",
+      "vis": "Tunez"
+    },
+    "F_Suecia_Tunez": {
+      "g": "F",
+      "loc": "Suecia",
+      "vis": "Tunez"
+    },
+    "G_Belgica_Egipto": {
+      "g": "G",
+      "loc": "Belgica",
+      "vis": "Egipto"
+    },
+    "G_Belgica_Iran": {
+      "g": "G",
+      "loc": "Belgica",
+      "vis": "Iran"
+    },
+    "G_Belgica_Nueva_Zelanda": {
+      "g": "G",
+      "loc": "Belgica",
+      "vis": "Nueva Zelanda"
+    },
+    "G_Egipto_Iran": {
+      "g": "G",
+      "loc": "Egipto",
+      "vis": "Iran"
+    },
+    "G_Egipto_Nueva_Zelanda": {
+      "g": "G",
+      "loc": "Egipto",
+      "vis": "Nueva Zelanda"
+    },
+    "G_Iran_Nueva_Zelanda": {
+      "g": "G",
+      "loc": "Iran",
+      "vis": "Nueva Zelanda"
+    },
+    "H_Espana_Cabo_Verde": {
+      "g": "H",
+      "loc": "Espana",
+      "vis": "Cabo Verde"
+    },
+    "H_Espana_Arabia_Saudi": {
+      "g": "H",
+      "loc": "Espana",
+      "vis": "Arabia Saudi"
+    },
+    "H_Espana_Uruguay": {
+      "g": "H",
+      "loc": "Espana",
+      "vis": "Uruguay"
+    },
+    "H_Cabo_Verde_Arabia_Saudi": {
+      "g": "H",
+      "loc": "Cabo Verde",
+      "vis": "Arabia Saudi"
+    },
+    "H_Cabo_Verde_Uruguay": {
+      "g": "H",
+      "loc": "Cabo Verde",
+      "vis": "Uruguay"
+    },
+    "H_Arabia_Saudi_Uruguay": {
+      "g": "H",
+      "loc": "Arabia Saudi",
+      "vis": "Uruguay"
+    },
+    "I_Francia_Senegal": {
+      "g": "I",
+      "loc": "Francia",
+      "vis": "Senegal"
+    },
+    "I_Francia_Irak": {
+      "g": "I",
+      "loc": "Francia",
+      "vis": "Irak"
+    },
+    "I_Francia_Noruega": {
+      "g": "I",
+      "loc": "Francia",
+      "vis": "Noruega"
+    },
+    "I_Senegal_Irak": {
+      "g": "I",
+      "loc": "Senegal",
+      "vis": "Irak"
+    },
+    "I_Senegal_Noruega": {
+      "g": "I",
+      "loc": "Senegal",
+      "vis": "Noruega"
+    },
+    "I_Irak_Noruega": {
+      "g": "I",
+      "loc": "Irak",
+      "vis": "Noruega"
+    },
+    "J_Argentina_Argelia": {
+      "g": "J",
+      "loc": "Argentina",
+      "vis": "Argelia"
+    },
+    "J_Argentina_Austria": {
+      "g": "J",
+      "loc": "Argentina",
+      "vis": "Austria"
+    },
+    "J_Argentina_Jordania": {
+      "g": "J",
+      "loc": "Argentina",
+      "vis": "Jordania"
+    },
+    "J_Argelia_Austria": {
+      "g": "J",
+      "loc": "Argelia",
+      "vis": "Austria"
+    },
+    "J_Argelia_Jordania": {
+      "g": "J",
+      "loc": "Argelia",
+      "vis": "Jordania"
+    },
+    "J_Austria_Jordania": {
+      "g": "J",
+      "loc": "Austria",
+      "vis": "Jordania"
+    },
+    "K_Portugal_RD_Congo": {
+      "g": "K",
+      "loc": "Portugal",
+      "vis": "RD Congo"
+    },
+    "K_Portugal_Uzbekistan": {
+      "g": "K",
+      "loc": "Portugal",
+      "vis": "Uzbekistan"
+    },
+    "K_Portugal_Colombia": {
+      "g": "K",
+      "loc": "Portugal",
+      "vis": "Colombia"
+    },
+    "K_RD_Congo_Uzbekistan": {
+      "g": "K",
+      "loc": "RD Congo",
+      "vis": "Uzbekistan"
+    },
+    "K_RD_Congo_Colombia": {
+      "g": "K",
+      "loc": "RD Congo",
+      "vis": "Colombia"
+    },
+    "K_Uzbekistan_Colombia": {
+      "g": "K",
+      "loc": "Uzbekistan",
+      "vis": "Colombia"
+    },
+    "L_Inglaterra_Croacia": {
+      "g": "L",
+      "loc": "Inglaterra",
+      "vis": "Croacia"
+    },
+    "L_Inglaterra_Ghana": {
+      "g": "L",
+      "loc": "Inglaterra",
+      "vis": "Ghana"
+    },
+    "L_Inglaterra_Panama": {
+      "g": "L",
+      "loc": "Inglaterra",
+      "vis": "Panama"
+    },
+    "L_Croacia_Ghana": {
+      "g": "L",
+      "loc": "Croacia",
+      "vis": "Ghana"
+    },
+    "L_Croacia_Panama": {
+      "g": "L",
+      "loc": "Croacia",
+      "vis": "Panama"
+    },
+    "L_Ghana_Panama": {
+      "g": "L",
+      "loc": "Ghana",
+      "vis": "Panama"
+    }
+  },
+  "lookup": {
+    "Mexico|Sudafrica": "A_Mexico_Sudafrica",
+    "Sudafrica|Mexico": "A_Mexico_Sudafrica",
+    "Mexico|Corea del Sur": "A_Mexico_Corea_del_Sur",
+    "Corea del Sur|Mexico": "A_Mexico_Corea_del_Sur",
+    "Mexico|Rep. Checa": "A_Mexico_Rep._Checa",
+    "Rep. Checa|Mexico": "A_Mexico_Rep._Checa",
+    "Sudafrica|Corea del Sur": "A_Sudafrica_Corea_del_Sur",
+    "Corea del Sur|Sudafrica": "A_Sudafrica_Corea_del_Sur",
+    "Sudafrica|Rep. Checa": "A_Sudafrica_Rep._Checa",
+    "Rep. Checa|Sudafrica": "A_Sudafrica_Rep._Checa",
+    "Corea del Sur|Rep. Checa": "A_Corea_del_Sur_Rep._Checa",
+    "Rep. Checa|Corea del Sur": "A_Corea_del_Sur_Rep._Checa",
+    "Canada|Bosnia-Herz.": "B_Canada_Bosnia-Herz.",
+    "Bosnia-Herz.|Canada": "B_Canada_Bosnia-Herz.",
+    "Canada|Qatar": "B_Canada_Qatar",
+    "Qatar|Canada": "B_Canada_Qatar",
+    "Canada|Suiza": "B_Canada_Suiza",
+    "Suiza|Canada": "B_Canada_Suiza",
+    "Bosnia-Herz.|Qatar": "B_Bosnia-Herz._Qatar",
+    "Qatar|Bosnia-Herz.": "B_Bosnia-Herz._Qatar",
+    "Bosnia-Herz.|Suiza": "B_Bosnia-Herz._Suiza",
+    "Suiza|Bosnia-Herz.": "B_Bosnia-Herz._Suiza",
+    "Qatar|Suiza": "B_Qatar_Suiza",
+    "Suiza|Qatar": "B_Qatar_Suiza",
+    "Brasil|Marruecos": "C_Brasil_Marruecos",
+    "Marruecos|Brasil": "C_Brasil_Marruecos",
+    "Brasil|Haiti": "C_Brasil_Haiti",
+    "Haiti|Brasil": "C_Brasil_Haiti",
+    "Brasil|Escocia": "C_Brasil_Escocia",
+    "Escocia|Brasil": "C_Brasil_Escocia",
+    "Marruecos|Haiti": "C_Marruecos_Haiti",
+    "Haiti|Marruecos": "C_Marruecos_Haiti",
+    "Marruecos|Escocia": "C_Marruecos_Escocia",
+    "Escocia|Marruecos": "C_Marruecos_Escocia",
+    "Haiti|Escocia": "C_Haiti_Escocia",
+    "Escocia|Haiti": "C_Haiti_Escocia",
+    "Estados Unidos|Paraguay": "D_Estados_Unidos_Paraguay",
+    "Paraguay|Estados Unidos": "D_Estados_Unidos_Paraguay",
+    "Estados Unidos|Australia": "D_Estados_Unidos_Australia",
+    "Australia|Estados Unidos": "D_Estados_Unidos_Australia",
+    "Estados Unidos|Turquia": "D_Estados_Unidos_Turquia",
+    "Turquia|Estados Unidos": "D_Estados_Unidos_Turquia",
+    "Paraguay|Australia": "D_Paraguay_Australia",
+    "Australia|Paraguay": "D_Paraguay_Australia",
+    "Paraguay|Turquia": "D_Paraguay_Turquia",
+    "Turquia|Paraguay": "D_Paraguay_Turquia",
+    "Australia|Turquia": "D_Australia_Turquia",
+    "Turquia|Australia": "D_Australia_Turquia",
+    "Alemania|Curazao": "E_Alemania_Curazao",
+    "Curazao|Alemania": "E_Alemania_Curazao",
+    "Alemania|Costa de Marfil": "E_Alemania_Costa_de_Marfil",
+    "Costa de Marfil|Alemania": "E_Alemania_Costa_de_Marfil",
+    "Alemania|Ecuador": "E_Alemania_Ecuador",
+    "Ecuador|Alemania": "E_Alemania_Ecuador",
+    "Curazao|Costa de Marfil": "E_Curazao_Costa_de_Marfil",
+    "Costa de Marfil|Curazao": "E_Curazao_Costa_de_Marfil",
+    "Curazao|Ecuador": "E_Curazao_Ecuador",
+    "Ecuador|Curazao": "E_Curazao_Ecuador",
+    "Costa de Marfil|Ecuador": "E_Costa_de_Marfil_Ecuador",
+    "Ecuador|Costa de Marfil": "E_Costa_de_Marfil_Ecuador",
+    "Paises Bajos|Japon": "F_Paises_Bajos_Japon",
+    "Japon|Paises Bajos": "F_Paises_Bajos_Japon",
+    "Paises Bajos|Suecia": "F_Paises_Bajos_Suecia",
+    "Suecia|Paises Bajos": "F_Paises_Bajos_Suecia",
+    "Paises Bajos|Tunez": "F_Paises_Bajos_Tunez",
+    "Tunez|Paises Bajos": "F_Paises_Bajos_Tunez",
+    "Japon|Suecia": "F_Japon_Suecia",
+    "Suecia|Japon": "F_Japon_Suecia",
+    "Japon|Tunez": "F_Japon_Tunez",
+    "Tunez|Japon": "F_Japon_Tunez",
+    "Suecia|Tunez": "F_Suecia_Tunez",
+    "Tunez|Suecia": "F_Suecia_Tunez",
+    "Belgica|Egipto": "G_Belgica_Egipto",
+    "Egipto|Belgica": "G_Belgica_Egipto",
+    "Belgica|Iran": "G_Belgica_Iran",
+    "Iran|Belgica": "G_Belgica_Iran",
+    "Belgica|Nueva Zelanda": "G_Belgica_Nueva_Zelanda",
+    "Nueva Zelanda|Belgica": "G_Belgica_Nueva_Zelanda",
+    "Egipto|Iran": "G_Egipto_Iran",
+    "Iran|Egipto": "G_Egipto_Iran",
+    "Egipto|Nueva Zelanda": "G_Egipto_Nueva_Zelanda",
+    "Nueva Zelanda|Egipto": "G_Egipto_Nueva_Zelanda",
+    "Iran|Nueva Zelanda": "G_Iran_Nueva_Zelanda",
+    "Nueva Zelanda|Iran": "G_Iran_Nueva_Zelanda",
+    "Espana|Cabo Verde": "H_Espana_Cabo_Verde",
+    "Cabo Verde|Espana": "H_Espana_Cabo_Verde",
+    "Espana|Arabia Saudi": "H_Espana_Arabia_Saudi",
+    "Arabia Saudi|Espana": "H_Espana_Arabia_Saudi",
+    "Espana|Uruguay": "H_Espana_Uruguay",
+    "Uruguay|Espana": "H_Espana_Uruguay",
+    "Cabo Verde|Arabia Saudi": "H_Cabo_Verde_Arabia_Saudi",
+    "Arabia Saudi|Cabo Verde": "H_Cabo_Verde_Arabia_Saudi",
+    "Cabo Verde|Uruguay": "H_Cabo_Verde_Uruguay",
+    "Uruguay|Cabo Verde": "H_Cabo_Verde_Uruguay",
+    "Arabia Saudi|Uruguay": "H_Arabia_Saudi_Uruguay",
+    "Uruguay|Arabia Saudi": "H_Arabia_Saudi_Uruguay",
+    "Francia|Senegal": "I_Francia_Senegal",
+    "Senegal|Francia": "I_Francia_Senegal",
+    "Francia|Irak": "I_Francia_Irak",
+    "Irak|Francia": "I_Francia_Irak",
+    "Francia|Noruega": "I_Francia_Noruega",
+    "Noruega|Francia": "I_Francia_Noruega",
+    "Senegal|Irak": "I_Senegal_Irak",
+    "Irak|Senegal": "I_Senegal_Irak",
+    "Senegal|Noruega": "I_Senegal_Noruega",
+    "Noruega|Senegal": "I_Senegal_Noruega",
+    "Irak|Noruega": "I_Irak_Noruega",
+    "Noruega|Irak": "I_Irak_Noruega",
+    "Argentina|Argelia": "J_Argentina_Argelia",
+    "Argelia|Argentina": "J_Argentina_Argelia",
+    "Argentina|Austria": "J_Argentina_Austria",
+    "Austria|Argentina": "J_Argentina_Austria",
+    "Argentina|Jordania": "J_Argentina_Jordania",
+    "Jordania|Argentina": "J_Argentina_Jordania",
+    "Argelia|Austria": "J_Argelia_Austria",
+    "Austria|Argelia": "J_Argelia_Austria",
+    "Argelia|Jordania": "J_Argelia_Jordania",
+    "Jordania|Argelia": "J_Argelia_Jordania",
+    "Austria|Jordania": "J_Austria_Jordania",
+    "Jordania|Austria": "J_Austria_Jordania",
+    "Portugal|RD Congo": "K_Portugal_RD_Congo",
+    "RD Congo|Portugal": "K_Portugal_RD_Congo",
+    "Portugal|Uzbekistan": "K_Portugal_Uzbekistan",
+    "Uzbekistan|Portugal": "K_Portugal_Uzbekistan",
+    "Portugal|Colombia": "K_Portugal_Colombia",
+    "Colombia|Portugal": "K_Portugal_Colombia",
+    "RD Congo|Uzbekistan": "K_RD_Congo_Uzbekistan",
+    "Uzbekistan|RD Congo": "K_RD_Congo_Uzbekistan",
+    "RD Congo|Colombia": "K_RD_Congo_Colombia",
+    "Colombia|RD Congo": "K_RD_Congo_Colombia",
+    "Uzbekistan|Colombia": "K_Uzbekistan_Colombia",
+    "Colombia|Uzbekistan": "K_Uzbekistan_Colombia",
+    "Inglaterra|Croacia": "L_Inglaterra_Croacia",
+    "Croacia|Inglaterra": "L_Inglaterra_Croacia",
+    "Inglaterra|Ghana": "L_Inglaterra_Ghana",
+    "Ghana|Inglaterra": "L_Inglaterra_Ghana",
+    "Inglaterra|Panama": "L_Inglaterra_Panama",
+    "Panama|Inglaterra": "L_Inglaterra_Panama",
+    "Croacia|Ghana": "L_Croacia_Ghana",
+    "Ghana|Croacia": "L_Croacia_Ghana",
+    "Croacia|Panama": "L_Croacia_Panama",
+    "Panama|Croacia": "L_Croacia_Panama",
+    "Ghana|Panama": "L_Ghana_Panama",
+    "Panama|Ghana": "L_Ghana_Panama"
+  }
+}
