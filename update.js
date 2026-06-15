@@ -228,17 +228,45 @@ async function main() {
     const ranking = [];
     snapParts.forEach(doc => {
       const p = doc.data();
-      // Simple pts count from resultados (groups only for now)
       let pts = 0;
+      // Grupos
       Object.keys(p.grupos || {}).forEach(k => {
         const pr = p.grupos[k], r = resultados[k];
-        if (!pr || !r) return;
+        if (!pr || !r || r.l === undefined || r.l === null) return;
         if (pr.l === r.l && pr.v === r.v) pts += 15;
         else if (Math.sign(pr.l - pr.v) === Math.sign(r.l - r.v)) pts += 5;
       });
-      ranking.push({ nombre: p.nick || p.nombre, pts, max: '?' });
+      // Elim exact scores
+      Object.keys(p.cuadro || {}).forEach(rid => {
+        const pr = p.cuadro[rid], rr = cuadroReal[rid];
+        if (!pr || !rr || pr.l === undefined || rr.l === undefined || rr.l === null) return;
+        if (pr.l === rr.l && pr.v === rr.v) pts += 15;
+        else if (Math.sign(pr.l - pr.v) === Math.sign(rr.l - rr.v)) pts += 5;
+      });
+      // Huecos
+      const PTS_R = {d16:10, oct:15, qrt:20, sem:25, ter:30, fin:30};
+      Object.keys(p.cuadro || {}).forEach(rid => {
+        const pr = p.cuadro[rid], rr = cuadroReal[rid];
+        if (!pr || !rr) return;
+        const rk = rid.split('_')[0], h = PTS_R[rk] || 0;
+        if (pr.eqL && rr.eqL && pr.eqL === rr.eqL) pts += h;
+        if (pr.eqV && rr.eqV && pr.eqV === rr.eqV) pts += h;
+      });
+      // Specials
+      const camp = (p.cuadro && p.cuadro['fin_f01'] && p.cuadro['fin_f01'].gan) || p.campeon || '';
+      if (state.campeonReal && camp === state.campeonReal) pts += 35;
+      if (state.balonReal && p.balon && p.balon.toLowerCase() === state.balonReal.toLowerCase()) pts += 25;
+      if (state.goleadorReal && p.goleador && p.goleador.toLowerCase() === state.goleadorReal.toLowerCase()) pts += 25;
+      if (state.golesReal != null && p.golesBota != null && p.golesBota === state.golesReal) pts += 30;
+      ranking.push({ nombre: p.nick || p.nombre, pts, max: 2615 });
     });
     ranking.sort((a, b) => b.pts - a.pts);
+    // Assign positions handling ties
+    let lastPts = null, lastPos = 0;
+    ranking.forEach((item, i) => {
+      if (item.pts !== lastPts) { lastPos = i + 1; lastPts = item.pts; }
+      item.pos = lastPos;
+    });
 
     // Build result string from updated matches
     const updatedMatch = pendingBatch.find(m => {
@@ -297,30 +325,32 @@ async function enviarEmail(partido, resultadoStr, ranking) {
     return ranking.slice(start, end).map((p, i) => {
       const ri = start + i;
       const bg = ri % 2 === 0 ? '#f8f9fa' : '#ffffff';
-      const pos = ri === 0 ? '🥇' : ri === 1 ? '🥈' : ri === 2 ? '🥉' : `${p.pos}`;
+      const medals = {0:'🥇', 1:'🥈', 2:'🥉'};
+      const pos = medals[ri] || String(p.pos || ri+1);
       const bold = ri < 3 ? 'font-weight:600;' : '';
       const ini = initials(p.nombre);
       const col = color(p.nombre);
+      const maxStr = p.max && p.max !== '?' ? p.max : '-';
       return `<tr style="background:${bg}">
-        <td style="padding:5px 6px;text-align:center;font-size:12px;color:#888">${pos}</td>
-        <td style="padding:5px 6px">
+        <td style="padding:5px 6px;text-align:center;font-size:12px;color:#888;white-space:nowrap;width:28px">${pos}</td>
+        <td style="padding:5px 6px;white-space:nowrap">
           <div style="display:flex;align-items:center;gap:6px">
             <div style="width:22px;height:22px;border-radius:50%;background:${col};display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:600;flex-shrink:0">${ini}</div>
             <span style="font-size:11px;${bold}">${p.nombre}</span>
           </div>
         </td>
-        <td style="padding:5px 6px;text-align:center;font-weight:600;color:#e8a020;font-size:13px">${p.pts}</td>
-        <td style="padding:5px 6px;text-align:center;color:#bbb;font-size:11px">${p.max}</td>
+        <td style="padding:5px 6px;text-align:center;font-weight:600;color:#e8a020;font-size:13px;width:32px">${p.pts}</td>
+        <td style="padding:5px 6px;text-align:center;color:#bbb;font-size:11px;width:36px">${maxStr}</td>
       </tr>`;
     }).join('');
   }
 
   function colTable(start, end) {
-    return `<table style="width:100%;border-collapse:collapse;font-size:12px">
+    return `<table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:auto">
       <thead><tr style="background:#1E3A5F;color:#fff">
         <th style="padding:6px 8px;text-align:center;width:28px">#</th>
         <th style="padding:6px 8px;text-align:left">Participante</th>
-        <th style="padding:6px 8px;text-align:center;width:36px">Pts</th>
+        <th style="padding:6px 8px;text-align:center;width:32px">Pts</th>
         <th style="padding:6px 8px;text-align:center;width:36px;color:#8ab4d8">Máx</th>
       </tr></thead>
       <tbody>${buildColHtml(start, end)}</tbody>
@@ -331,27 +361,29 @@ async function enviarEmail(partido, resultadoStr, ranking) {
 
   const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
 <body style="font-family:Arial,sans-serif;background:#f0f2f5;margin:0;padding:20px">
-<div style="max-width:800px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0">
+<div style="max-width:820px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0">
   <div style="background:#1E3A5F;padding:18px 20px;text-align:center">
     <div style="color:#e8a020;font-size:20px;font-weight:600">Porra Mundial 2026</div>
     <div style="color:#8ab4d8;font-size:13px;margin-top:4px">Clasificación actualizada</div>
   </div>
-  <div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:14px 20px">
-    <div style="font-size:12px;color:#555;margin-bottom:2px">Resultado del partido:</div>
-    <div style="font-size:16px;font-weight:600;color:#1E3A5F">${partido}</div>
-    <div style="font-size:28px;font-weight:600;color:#2e7d32;margin-top:2px">${resultadoStr}</div>
+  <div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:12px 20px;display:flex;align-items:center;gap:16px">
+    <div>
+      <div style="font-size:12px;color:#555;margin-bottom:2px">Resultado del partido:</div>
+      <div style="font-size:16px;font-weight:600;color:#1E3A5F">${partido}</div>
+    </div>
+    <div style="font-size:22px;font-weight:700;color:#2e7d32;white-space:nowrap">${resultadoStr}</div>
   </div>
-  <div style="padding:16px 20px">
-    <div style="font-size:13px;color:#888;margin-bottom:10px">Clasificación completa (${N} participantes)</div>
+  <div style="padding:14px 16px">
+    <div style="font-size:12px;color:#888;margin-bottom:8px">Clasificación completa (${N} participantes)</div>
     <table style="width:100%;border-collapse:collapse">
       <tr>
-        <td style="width:33%;vertical-align:top;padding-right:4px">${colTable(0, perCol)}</td>
-        <td style="width:33%;vertical-align:top;padding:0 4px">${colTable(perCol, perCol*2)}</td>
-        <td style="width:33%;vertical-align:top;padding-left:4px">${colTable(perCol*2, N)}</td>
+        <td style="width:33%;vertical-align:top;padding-right:3px">${colTable(0, perCol)}</td>
+        <td style="width:33%;vertical-align:top;padding:0 3px">${colTable(perCol, perCol*2)}</td>
+        <td style="width:33%;vertical-align:top;padding-left:3px">${colTable(perCol*2, N)}</td>
       </tr>
     </table>
   </div>
-  <div style="background:#f8f9fa;padding:10px 20px;text-align:center;border-top:1px solid #eee">
+  <div style="background:#f8f9fa;padding:8px 20px;text-align:center;border-top:1px solid #eee">
     <div style="color:#aaa;font-size:11px">Actualizado automáticamente · ${fecha}</div>
   </div>
 </div>
