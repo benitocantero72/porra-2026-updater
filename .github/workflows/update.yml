@@ -1,0 +1,33 @@
+name: Actualizar resultados Porra 2026
+
+on:
+  schedule:
+    # Cada 10 minutos entre las 17:00 UTC y las 07:00 UTC
+    # (= 19:00 - 09:00 hora española en verano UTC+2)
+    - cron: '*/10 17-23 * * *'   # 19:00-01:50 española
+    - cron: '*/10 0-7 * * *'     # 02:00-09:50 española
+  workflow_dispatch:              # También permite lanzarlo manualmente
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Actualizar resultados
+        env:
+          FD_API_KEY: ${{ secrets.FD_API_KEY }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: node update.js
