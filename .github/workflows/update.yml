@@ -1,3 +1,4 @@
+# forzar activación cron
 name: Actualizar resultados Porra 2026
 on:
   schedule:
