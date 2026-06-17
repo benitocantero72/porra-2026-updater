@@ -66,20 +66,30 @@ function mapTeam(name) {
   return name;
 }
 
-function apiGet(path) {
+function apiGet(path, retries = 3) {
   return new Promise((resolve, reject) => {
-    https.get({
-      hostname: 'api.football-data.org',
-      path,
-      headers: { 'X-Auth-Token': FD_API_KEY }
-    }, res => {
-      let body = '';
-      res.on('data', d => body += d);
-      res.on('end', () => {
-        try { resolve(JSON.parse(body)); }
-        catch(e) { reject(new Error('JSON parse: ' + body.slice(0, 200))); }
+    const attempt = (n) => {
+      https.get({
+        hostname: 'api.football-data.org',
+        path,
+        headers: { 'X-Auth-Token': FD_API_KEY }
+      }, res => {
+        let body = '';
+        res.on('data', d => body += d);
+        res.on('end', () => {
+          try { resolve(JSON.parse(body)); }
+          catch(e) { reject(new Error('JSON parse: ' + body.slice(0, 200))); }
+        });
+      }).on('error', err => {
+        if (n > 1) {
+          console.warn(`  ⚠ Error de red (${err.message}), reintentando en 5s... (${n-1} intentos restantes)`);
+          setTimeout(() => attempt(n - 1), 5000);
+        } else {
+          reject(err);
+        }
       });
-    }).on('error', reject);
+    };
+    attempt(retries);
   });
 }
 
@@ -138,9 +148,19 @@ async function main() {
   });
 
   // 4. Consultar football-data.org por esa fecha
+  // Partidos a las 00:xx-01:xx hora española son el día anterior en UTC
+  // (football-data.org usa UTC), así que buscamos también en la fecha anterior
   const [day, month] = firstPending.fecha.split('/');
   const dateStr = `2026-${month}-${day}`;
-  const url = `/v4/competitions/${FD_COMPETITION}/matches?status=FINISHED&dateFrom=${dateStr}&dateTo=${dateStr}`;
+  const hora = parseInt((firstPending.hora || '12:00').split(':')[0]);
+  const needPrevDay = hora < 2; // 00:xx o 01:xx hora España → puede ser día anterior UTC
+  let dateFrom = dateStr;
+  if (needPrevDay) {
+    const d = new Date(`${dateStr}T00:00:00`);
+    d.setDate(d.getDate() - 1);
+    dateFrom = d.toISOString().slice(0, 10);
+  }
+  const url = `/v4/competitions/${FD_COMPETITION}/matches?status=FINISHED&dateFrom=${dateFrom}&dateTo=${dateStr}`;
   console.log('\n📡 Consultando API:', url);
 
   let data;
