@@ -66,30 +66,20 @@ function mapTeam(name) {
   return name;
 }
 
-function apiGet(path, retries = 3) {
+function apiGet(path) {
   return new Promise((resolve, reject) => {
-    const attempt = (n) => {
-      https.get({
-        hostname: 'api.football-data.org',
-        path,
-        headers: { 'X-Auth-Token': FD_API_KEY }
-      }, res => {
-        let body = '';
-        res.on('data', d => body += d);
-        res.on('end', () => {
-          try { resolve(JSON.parse(body)); }
-          catch(e) { reject(new Error('JSON parse: ' + body.slice(0, 200))); }
-        });
-      }).on('error', err => {
-        if (n > 1) {
-          console.warn(`  ⚠ Error de red (${err.message}), reintentando en 5s... (${n-1} intentos restantes)`);
-          setTimeout(() => attempt(n - 1), 5000);
-        } else {
-          reject(err);
-        }
+    https.get({
+      hostname: 'api.football-data.org',
+      path,
+      headers: { 'X-Auth-Token': FD_API_KEY }
+    }, res => {
+      let body = '';
+      res.on('data', d => body += d);
+      res.on('end', () => {
+        try { resolve(JSON.parse(body)); }
+        catch(e) { reject(new Error('JSON parse: ' + body.slice(0, 200))); }
       });
-    };
-    attempt(retries);
+    }).on('error', reject);
   });
 }
 
@@ -148,19 +138,9 @@ async function main() {
   });
 
   // 4. Consultar football-data.org por esa fecha
-  // Partidos a las 00:xx-01:xx hora española son el día anterior en UTC
-  // (football-data.org usa UTC), así que buscamos también en la fecha anterior
   const [day, month] = firstPending.fecha.split('/');
   const dateStr = `2026-${month}-${day}`;
-  const hora = parseInt((firstPending.hora || '12:00').split(':')[0]);
-  const needPrevDay = hora < 2; // 00:xx o 01:xx hora España → puede ser día anterior UTC
-  let dateFrom = dateStr;
-  if (needPrevDay) {
-    const d = new Date(`${dateStr}T00:00:00`);
-    d.setDate(d.getDate() - 1);
-    dateFrom = d.toISOString().slice(0, 10);
-  }
-  const url = `/v4/competitions/${FD_COMPETITION}/matches?status=FINISHED&dateFrom=${dateFrom}&dateTo=${dateStr}`;
+  const url = `/v4/competitions/${FD_COMPETITION}/matches?status=FINISHED&dateFrom=${dateStr}&dateTo=${dateStr}`;
   console.log('\n📡 Consultando API:', url);
 
   let data;
@@ -178,12 +158,13 @@ async function main() {
   }
 
   // Indexar partidos terminados por equipos para búsqueda rápida
+  // swapped=true significa que el partido fue encontrado con orden invertido respecto a la porra
   const finishedByTeams = {};
   for (const fm of finished) {
     const home = mapTeam(fm.homeTeam.name);
     const away = mapTeam(fm.awayTeam.name);
-    finishedByTeams[`${home}|${away}`] = { fm, home, away };
-    finishedByTeams[`${away}|${home}`] = { fm, home, away };
+    finishedByTeams[`${home}|${away}`] = { fm, home, away, swapped: false };
+    finishedByTeams[`${away}|${home}`] = { fm, home, away, swapped: true };
   }
 
   // 5. Para cada partido del lote, buscar en los terminados y actualizar
@@ -216,21 +197,29 @@ async function main() {
     const awayGoals = fm.score.fullTime.away;
 
     if (pending.tipo === 'grupo') {
-      resultados[pending.key] = { l: homeGoals, v: awayGoals };
-      console.log(`\n  ✅ ${pending.key}: ${homeGoals}-${awayGoals}`);
+      // Si found.swapped=true, home de la API es el visitante en la porra → invertir
+      const locGoals = found.swapped ? awayGoals : homeGoals;
+      const visGoals = found.swapped ? homeGoals : awayGoals;
+      resultados[pending.key] = { l: locGoals, v: visGoals };
+      console.log(`\n  ✅ ${pending.key}: ${pending.loc} ${locGoals}-${visGoals} ${pending.vis}`);
       updated++;
 
     } else {
       const penHome = fm.score.penalties?.home ?? null;
       const penAway = fm.score.penalties?.away ?? null;
-      const winner  = homeGoals > awayGoals ? home
-                    : awayGoals > homeGoals ? away
-                    : penHome !== null ? (penHome > penAway ? home : away)
-                    : null;
+      // Si swapped=true, home de la API es el visitante en el cuadro → invertir
+      const locGoals = found.swapped ? awayGoals : homeGoals;
+      const visGoals = found.swapped ? homeGoals : awayGoals;
+      const locPen   = found.swapped ? penAway  : penHome;
+      const visPen   = found.swapped ? penHome  : penAway;
+      const winner   = locGoals > visGoals ? (found.swapped ? away : home)
+                     : visGoals > locGoals ? (found.swapped ? home : away)
+                     : locPen !== null ? (locPen > visPen ? (found.swapped ? away : home) : (found.swapped ? home : away))
+                     : null;
       cuadroReal[pending.key] = {
         ...cuadroReal[pending.key],
-        l: homeGoals, v: awayGoals,
-        pl: penHome, pv: penAway, gan: winner
+        l: locGoals, v: visGoals,
+        pl: locPen, pv: visPen, gan: winner
       };
       const penStr = penHome !== null ? ` (pen ${penHome}-${penAway})` : '';
       console.log(`\n  ✅ ${pending.key}: ${homeGoals}-${awayGoals}${penStr} gan=${winner}`);
