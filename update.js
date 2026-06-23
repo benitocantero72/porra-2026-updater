@@ -158,13 +158,13 @@ async function main() {
   }
 
   // Indexar partidos terminados por equipos para búsqueda rápida
-  // swapped=true significa que el partido fue encontrado con orden invertido respecto a la porra
+  // Guardamos home y away mapeados para poder identificar cuál es loc y cuál vis
   const finishedByTeams = {};
   for (const fm of finished) {
     const home = mapTeam(fm.homeTeam.name);
     const away = mapTeam(fm.awayTeam.name);
-    finishedByTeams[`${home}|${away}`] = { fm, home, away, swapped: false };
-    finishedByTeams[`${away}|${home}`] = { fm, home, away, swapped: true };
+    finishedByTeams[`${home}|${away}`] = { fm, home, away };
+    finishedByTeams[`${away}|${home}`] = { fm, home, away };
   }
 
   // 5. Para cada partido del lote, buscar en los terminados y actualizar
@@ -197,9 +197,11 @@ async function main() {
     const awayGoals = fm.score.fullTime.away;
 
     if (pending.tipo === 'grupo') {
-      // Si found.swapped=true, home de la API es el visitante en la porra → invertir
-      const locGoals = found.swapped ? awayGoals : homeGoals;
-      const visGoals = found.swapped ? homeGoals : awayGoals;
+      // Identificar cuál equipo de la API corresponde a loc y cuál a vis en la porra
+      // home de la API puede ser loc o vis según el orden real del partido
+      const locIsHome = found.home === pending.loc;
+      const locGoals  = locIsHome ? homeGoals : awayGoals;
+      const visGoals  = locIsHome ? awayGoals : homeGoals;
       resultados[pending.key] = { l: locGoals, v: visGoals };
       console.log(`\n  ✅ ${pending.key}: ${pending.loc} ${locGoals}-${visGoals} ${pending.vis}`);
       updated++;
@@ -207,15 +209,18 @@ async function main() {
     } else {
       const penHome = fm.score.penalties?.home ?? null;
       const penAway = fm.score.penalties?.away ?? null;
-      // Si swapped=true, home de la API es el visitante en el cuadro → invertir
-      const locGoals = found.swapped ? awayGoals : homeGoals;
-      const visGoals = found.swapped ? homeGoals : awayGoals;
-      const locPen   = found.swapped ? penAway  : penHome;
-      const visPen   = found.swapped ? penHome  : penAway;
-      const winner   = locGoals > visGoals ? (found.swapped ? away : home)
-                     : visGoals > locGoals ? (found.swapped ? home : away)
-                     : locPen !== null ? (locPen > visPen ? (found.swapped ? away : home) : (found.swapped ? home : away))
-                     : null;
+      // Identificar cuál equipo de la API es el local (eqL) del cuadro real
+      const r = cuadroReal[pending.key];
+      const eqL = r?.eqL || '';
+      const locIsHome = found.home === eqL;
+      const locGoals  = locIsHome ? homeGoals : awayGoals;
+      const visGoals  = locIsHome ? awayGoals : homeGoals;
+      const locPen    = locIsHome ? penHome   : penAway;
+      const visPen    = locIsHome ? penAway   : penHome;
+      const winner    = locGoals > visGoals ? (locIsHome ? home : away)
+                      : visGoals > locGoals ? (locIsHome ? away : home)
+                      : locPen !== null ? (locPen > visPen ? (locIsHome ? home : away) : (locIsHome ? away : home))
+                      : null;
       cuadroReal[pending.key] = {
         ...cuadroReal[pending.key],
         l: locGoals, v: visGoals,
