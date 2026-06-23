@@ -197,22 +197,35 @@ async function main() {
     const awayGoals = fm.score.fullTime.away;
 
     if (pending.tipo === 'grupo') {
-      // Identificar cuál equipo de la API corresponde a loc y cuál a vis en la porra
-      // home de la API puede ser loc o vis según el orden real del partido
-      const locIsHome = found.home === pending.loc;
+      // Determinar orden: comparar home con loc Y away con vis
+      // Si home==loc && away==vis → orden normal
+      // Si home==vis && away==loc → invertido
+      // Si ninguno coincide exactamente → log de advertencia, usar home=loc
+      const normalOrder   = found.home === pending.loc && found.away === pending.vis;
+      const invertedOrder = found.home === pending.vis && found.away === pending.loc;
+      if (!normalOrder && !invertedOrder) {
+        console.warn(`  ⚠ No se pudo determinar orden para ${pending.key}: API home="${found.home}" away="${found.away}" vs porra loc="${pending.loc}" vis="${pending.vis}" — usando home=loc`);
+      }
+      const locIsHome = normalOrder || (!invertedOrder);
       const locGoals  = locIsHome ? homeGoals : awayGoals;
       const visGoals  = locIsHome ? awayGoals : homeGoals;
       resultados[pending.key] = { l: locGoals, v: visGoals };
-      console.log(`\n  ✅ ${pending.key}: ${pending.loc} ${locGoals}-${visGoals} ${pending.vis}`);
+      console.log(`\n  ✅ ${pending.key}: ${pending.loc} ${locGoals}-${visGoals} ${pending.vis}${invertedOrder?' (invertido)':''}`);
       updated++;
 
     } else {
       const penHome = fm.score.penalties?.home ?? null;
       const penAway = fm.score.penalties?.away ?? null;
-      // Identificar cuál equipo de la API es el local (eqL) del cuadro real
+      // Identificar cuál equipo de la API es eqL y cuál eqV del cuadro real
       const r = cuadroReal[pending.key];
       const eqL = r?.eqL || '';
-      const locIsHome = found.home === eqL;
+      const eqV = r?.eqV || '';
+      const normalOrder   = found.home === eqL && found.away === eqV;
+      const invertedOrder = found.home === eqV && found.away === eqL;
+      if (!normalOrder && !invertedOrder) {
+        console.warn(`  ⚠ No se pudo determinar orden para ${pending.key}: API home="${found.home}" away="${found.away}" vs cuadro eqL="${eqL}" eqV="${eqV}" — usando home=eqL`);
+      }
+      const locIsHome = normalOrder || (!invertedOrder);
       const locGoals  = locIsHome ? homeGoals : awayGoals;
       const visGoals  = locIsHome ? awayGoals : homeGoals;
       const locPen    = locIsHome ? penHome   : penAway;
