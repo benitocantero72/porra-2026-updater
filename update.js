@@ -197,20 +197,18 @@ async function main() {
     const awayGoals = fm.score.fullTime.away;
 
     if (pending.tipo === 'grupo') {
-      // Determinar orden: comparar home con loc Y away con vis
-      // Si home==loc && away==vis → orden normal
-      // Si home==vis && away==loc → invertido
-      // Si ninguno coincide exactamente → log de advertencia, usar home=loc
+      // Determinar cuál equipo de la API es loc y cuál vis
+      // Comparar ambos sentidos para máxima robustez
       const normalOrder   = found.home === pending.loc && found.away === pending.vis;
       const invertedOrder = found.home === pending.vis && found.away === pending.loc;
       if (!normalOrder && !invertedOrder) {
-        console.warn(`  ⚠ No se pudo determinar orden para ${pending.key}: API home="${found.home}" away="${found.away}" vs porra loc="${pending.loc}" vis="${pending.vis}" — usando home=loc`);
+        console.warn(`  ⚠ Orden incierto ${pending.key}: home="${found.home}" away="${found.away}" loc="${pending.loc}" vis="${pending.vis}" — usando home=loc`);
       }
-      const locIsHome = normalOrder || (!invertedOrder);
+      const locIsHome = normalOrder || !invertedOrder;
       const locGoals  = locIsHome ? homeGoals : awayGoals;
       const visGoals  = locIsHome ? awayGoals : homeGoals;
       resultados[pending.key] = { l: locGoals, v: visGoals };
-      console.log(`\n  ✅ ${pending.key}: ${pending.loc} ${locGoals}-${visGoals} ${pending.vis}${invertedOrder?' (invertido)':''}`);
+      console.log(`\n  ✅ ${pending.key}: ${pending.loc} ${locGoals}-${visGoals} ${pending.vis}`);
       updated++;
 
     } else {
