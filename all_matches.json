@@ -245,8 +245,8 @@
     "hora": "18:00",
     "tipo": "grupo",
     "g": "A",
-    "loc": "Rep. Checa",
-    "vis": "Sudafrica",
+    "loc": "Sudafrica",
+    "vis": "Rep. Checa",
     "key": "A_Sudafrica_Rep._Checa"
   },
   {
@@ -255,8 +255,8 @@
     "hora": "21:00",
     "tipo": "grupo",
     "g": "B",
-    "loc": "Suiza",
-    "vis": "Bosnia-Herz.",
+    "loc": "Bosnia-Herz.",
+    "vis": "Suiza",
     "key": "B_Bosnia-Herz._Suiza"
   },
   {
@@ -295,8 +295,8 @@
     "hora": "00:00",
     "tipo": "grupo",
     "g": "C",
-    "loc": "Escocia",
-    "vis": "Marruecos",
+    "loc": "Marruecos",
+    "vis": "Escocia",
     "key": "C_Marruecos_Escocia"
   },
   {
@@ -315,8 +315,8 @@
     "hora": "06:00",
     "tipo": "grupo",
     "g": "D",
-    "loc": "Turquia",
-    "vis": "Paraguay",
+    "loc": "Paraguay",
+    "vis": "Turquia",
     "key": "D_Paraguay_Turquia"
   },
   {
@@ -345,8 +345,8 @@
     "hora": "02:00",
     "tipo": "grupo",
     "g": "E",
-    "loc": "Ecuador",
-    "vis": "Curazao",
+    "loc": "Curazao",
+    "vis": "Ecuador",
     "key": "E_Curazao_Ecuador"
   },
   {
@@ -355,8 +355,8 @@
     "hora": "06:00",
     "tipo": "grupo",
     "g": "F",
-    "loc": "Tunez",
-    "vis": "Japon",
+    "loc": "Japon",
+    "vis": "Tunez",
     "key": "F_Japon_Tunez"
   },
   {
@@ -385,8 +385,8 @@
     "hora": "00:00",
     "tipo": "grupo",
     "g": "H",
-    "loc": "Uruguay",
-    "vis": "Cabo Verde",
+    "loc": "Cabo Verde",
+    "vis": "Uruguay",
     "key": "H_Cabo_Verde_Uruguay"
   },
   {
@@ -395,8 +395,8 @@
     "hora": "03:00",
     "tipo": "grupo",
     "g": "G",
-    "loc": "Nueva Zelanda",
-    "vis": "Egipto",
+    "loc": "Egipto",
+    "vis": "Nueva Zelanda",
     "key": "G_Egipto_Nueva_Zelanda"
   },
   {
@@ -425,8 +425,8 @@
     "hora": "02:00",
     "tipo": "grupo",
     "g": "I",
-    "loc": "Noruega",
-    "vis": "Senegal",
+    "loc": "Senegal",
+    "vis": "Noruega",
     "key": "I_Senegal_Noruega"
   },
   {
@@ -435,8 +435,8 @@
     "hora": "05:00",
     "tipo": "grupo",
     "g": "J",
-    "loc": "Jordania",
-    "vis": "Argelia",
+    "loc": "Argelia",
+    "vis": "Jordania",
     "key": "J_Argelia_Jordania"
   },
   {
@@ -465,8 +465,8 @@
     "hora": "01:00",
     "tipo": "grupo",
     "g": "L",
-    "loc": "Panama",
-    "vis": "Croacia",
+    "loc": "Croacia",
+    "vis": "Panama",
     "key": "L_Croacia_Panama"
   },
   {
@@ -475,8 +475,8 @@
     "hora": "04:00",
     "tipo": "grupo",
     "g": "K",
-    "loc": "Colombia",
-    "vis": "RD Congo",
+    "loc": "RD Congo",
+    "vis": "Colombia",
     "key": "K_RD_Congo_Colombia"
   },
   {
@@ -485,8 +485,8 @@
     "hora": "21:00",
     "tipo": "grupo",
     "g": "B",
-    "loc": "Suiza",
-    "vis": "Canada",
+    "loc": "Canada",
+    "vis": "Suiza",
     "key": "B_Canada_Suiza"
   },
   {
@@ -505,8 +505,8 @@
     "hora": "00:00",
     "tipo": "grupo",
     "g": "C",
-    "loc": "Escocia",
-    "vis": "Brasil",
+    "loc": "Brasil",
+    "vis": "Escocia",
     "key": "C_Brasil_Escocia"
   },
   {
@@ -525,8 +525,8 @@
     "hora": "03:00",
     "tipo": "grupo",
     "g": "A",
-    "loc": "Rep. Checa",
-    "vis": "Mexico",
+    "loc": "Mexico",
+    "vis": "Rep. Checa",
     "key": "A_Mexico_Rep._Checa"
   },
   {
@@ -555,8 +555,8 @@
     "hora": "22:00",
     "tipo": "grupo",
     "g": "E",
-    "loc": "Ecuador",
-    "vis": "Alemania",
+    "loc": "Alemania",
+    "vis": "Ecuador",
     "key": "E_Alemania_Ecuador"
   },
   {
@@ -575,8 +575,8 @@
     "hora": "01:00",
     "tipo": "grupo",
     "g": "F",
-    "loc": "Tunez",
-    "vis": "Paises Bajos",
+    "loc": "Paises Bajos",
+    "vis": "Tunez",
     "key": "F_Paises_Bajos_Tunez"
   },
   {
@@ -585,8 +585,8 @@
     "hora": "04:00",
     "tipo": "grupo",
     "g": "D",
-    "loc": "Turquia",
-    "vis": "Estados Unidos",
+    "loc": "Estados Unidos",
+    "vis": "Turquia",
     "key": "D_Estados_Unidos_Turquia"
   },
   {
@@ -605,8 +605,8 @@
     "hora": "21:00",
     "tipo": "grupo",
     "g": "I",
-    "loc": "Noruega",
-    "vis": "Francia",
+    "loc": "Francia",
+    "vis": "Noruega",
     "key": "I_Francia_Noruega"
   },
   {
@@ -635,8 +635,8 @@
     "hora": "02:00",
     "tipo": "grupo",
     "g": "H",
-    "loc": "Uruguay",
-    "vis": "Espana",
+    "loc": "Espana",
+    "vis": "Uruguay",
     "key": "H_Espana_Uruguay"
   },
   {
@@ -655,8 +655,8 @@
     "hora": "05:00",
     "tipo": "grupo",
     "g": "G",
-    "loc": "Nueva Zelanda",
-    "vis": "Belgica",
+    "loc": "Belgica",
+    "vis": "Nueva Zelanda",
     "key": "G_Belgica_Nueva_Zelanda"
   },
   {
@@ -665,8 +665,8 @@
     "hora": "23:00",
     "tipo": "grupo",
     "g": "L",
-    "loc": "Panama",
-    "vis": "Inglaterra",
+    "loc": "Inglaterra",
+    "vis": "Panama",
     "key": "L_Inglaterra_Panama"
   },
   {
@@ -685,8 +685,8 @@
     "hora": "01:30",
     "tipo": "grupo",
     "g": "K",
-    "loc": "Colombia",
-    "vis": "Portugal",
+    "loc": "Portugal",
+    "vis": "Colombia",
     "key": "K_Portugal_Colombia"
   },
   {
@@ -715,8 +715,8 @@
     "hora": "04:00",
     "tipo": "grupo",
     "g": "J",
-    "loc": "Jordania",
-    "vis": "Argentina",
+    "loc": "Argentina",
+    "vis": "Jordania",
     "key": "J_Argentina_Jordania"
   },
   {
