@@ -9,6 +9,7 @@
  */
 
 const https  = require('https');
+const { calcPts } = require('./calcPts');
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore }        = require('firebase-admin/firestore');
 
@@ -277,40 +278,21 @@ async function main() {
 
     // Build ranking from updated data
     const snapParts = await db.collection('participantes').get();
+    // Calcular puntos usando la misma lógica que la app (incluye huecos eliminatorios)
+    const stateForCalc = {
+      resultados,
+      cuadroReal,
+      ordenManualReal: state.ordenManualReal || {},
+      campeonReal: state.campeonReal || null,
+      balonReal: state.balonReal || null,
+      goleadorReal: state.goleadorReal || null,
+      golesReal: state.golesReal != null ? state.golesReal : null,
+    };
     const ranking = [];
     snapParts.forEach(doc => {
       const p = doc.data();
-      let pts = 0;
-      // Grupos
-      Object.keys(p.grupos || {}).forEach(k => {
-        const pr = p.grupos[k], r = resultados[k];
-        if (!pr || !r || r.l === undefined || r.l === null) return;
-        if (pr.l === r.l && pr.v === r.v) pts += 15;
-        else if (Math.sign(pr.l - pr.v) === Math.sign(r.l - r.v)) pts += 5;
-      });
-      // Elim exact scores
-      Object.keys(p.cuadro || {}).forEach(rid => {
-        const pr = p.cuadro[rid], rr = cuadroReal[rid];
-        if (!pr || !rr || pr.l === undefined || rr.l === undefined || rr.l === null) return;
-        if (pr.l === rr.l && pr.v === rr.v) pts += 15;
-        else if (Math.sign(pr.l - pr.v) === Math.sign(rr.l - rr.v)) pts += 5;
-      });
-      // Huecos
-      const PTS_R = {d16:10, oct:15, qrt:20, sem:25, ter:30, fin:30};
-      Object.keys(p.cuadro || {}).forEach(rid => {
-        const pr = p.cuadro[rid], rr = cuadroReal[rid];
-        if (!pr || !rr) return;
-        const rk = rid.split('_')[0], h = PTS_R[rk] || 0;
-        if (pr.eqL && rr.eqL && pr.eqL === rr.eqL) pts += h;
-        if (pr.eqV && rr.eqV && pr.eqV === rr.eqV) pts += h;
-      });
-      // Specials
-      const camp = (p.cuadro && p.cuadro['fin_f01'] && p.cuadro['fin_f01'].gan) || p.campeon || '';
-      if (state.campeonReal && camp === state.campeonReal) pts += 35;
-      if (state.balonReal && p.balon && p.balon.toLowerCase() === state.balonReal.toLowerCase()) pts += 25;
-      if (state.goleadorReal && p.goleador && p.goleador.toLowerCase() === state.goleadorReal.toLowerCase()) pts += 25;
-      if (state.golesReal != null && p.golesBota != null && p.golesBota === state.golesReal) pts += 30;
-      ranking.push({ nombre: p.nick || p.nombre, pts });
+      const result = calcPts(p, stateForCalc);
+      ranking.push({ nombre: p.nick || p.nombre, pts: result.pts });
     });
     ranking.sort((a, b) => b.pts - a.pts);
     // Assign positions handling ties
