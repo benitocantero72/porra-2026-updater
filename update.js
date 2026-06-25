@@ -138,9 +138,17 @@ async function main() {
   });
 
   // 4. Consultar football-data.org por esa fecha
+  // Partidos a las 00:xx hora española son el día anterior en UTC (football-data.org usa UTC)
   const [day, month] = firstPending.fecha.split('/');
   const dateStr = `2026-${month}-${day}`;
-  const url = `/v4/competitions/${FD_COMPETITION}/matches?status=FINISHED&dateFrom=${dateStr}&dateTo=${dateStr}`;
+  const hora = parseInt((firstPending.hora || '12:00').split(':')[0]);
+  let dateFrom = dateStr;
+  if (hora < 2) {
+    const d = new Date(`${dateStr}T00:00:00`);
+    d.setDate(d.getDate() - 1);
+    dateFrom = d.toISOString().slice(0, 10);
+  }
+  const url = `/v4/competitions/${FD_COMPETITION}/matches?status=FINISHED&dateFrom=${dateFrom}&dateTo=${dateStr}`;
   console.log('\n📡 Consultando API:', url);
 
   let data;
