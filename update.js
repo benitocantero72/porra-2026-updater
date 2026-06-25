@@ -320,27 +320,24 @@ async function main() {
       item.pos = lastPos;
     });
 
-    // Build result string from updated matches
-    const updatedMatch = pendingBatch.find(m => {
-      if (m.tipo === 'grupo') return resultados[m.key];
+    // Build result string from ALL updated matches
+    const updatedMatches = pendingBatch.filter(m => {
+      if (m.tipo === 'grupo') return resultados[m.key] && resultados[m.key].l != null;
       return cuadroReal[m.key] && cuadroReal[m.key].l != null;
     });
-    let partidoLabel = '', resultadoStr = '';
-    if (updatedMatch) {
-      if (updatedMatch.tipo === 'grupo') {
-        partidoLabel = `${updatedMatch.loc} vs ${updatedMatch.vis}`;
-        const r = resultados[updatedMatch.key];
-        resultadoStr = `${r.l} - ${r.v}`;
+    const partidos = updatedMatches.map(m => {
+      if (m.tipo === 'grupo') {
+        const r = resultados[m.key];
+        return { label: `${m.loc} vs ${m.vis}`, resultado: `${r.l} - ${r.v}` };
       } else {
-        const r = cuadroReal[updatedMatch.key];
-        partidoLabel = `${r.eqL} vs ${r.eqV}`;
-        resultadoStr = `${r.l} - ${r.v}`;
+        const r = cuadroReal[m.key];
+        return { label: `${r.eqL} vs ${r.eqV}`, resultado: `${r.l} - ${r.v}` };
       }
-    }
+    });
 
-    if (process.env.GMAIL_APP_PASSWORD && partidoLabel) {
+    if (process.env.GMAIL_APP_PASSWORD && partidos.length > 0) {
       try {
-        await enviarEmail(partidoLabel, resultadoStr, ranking);
+        await enviarEmail(partidos, ranking);
       } catch(e) {
         console.error('⚠️ Error enviando email:', e.message);
       }
@@ -353,7 +350,7 @@ async function main() {
 main().catch(e => { console.error('❌ Error fatal:', e); process.exit(1); });
 
 // ── EMAIL ─────────────────────────────────────────────────────────────────────
-async function enviarEmail(partido, resultadoStr, ranking) {
+async function enviarEmail(partidos, ranking) {
   const nodemailer = require('nodemailer');
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -415,9 +412,11 @@ async function enviarEmail(partido, resultadoStr, ranking) {
     <span style="color:#e8a020;font-size:13px;font-weight:600">Porra Mundial 2026</span>
     <span style="color:#8ab4d8;font-size:11px">${fecha}</span>
   </div>
-  <div style="background:#e8f5e9;border-left:3px solid #2e7d32;padding:6px 14px;display:flex;align-items:center;gap:14px">
-    <span style="font-size:13px;font-weight:600;color:#1E3A5F">${partido}</span>
-    <span style="font-size:15px;font-weight:700;color:#2e7d32;white-space:nowrap">${resultadoStr}</span>
+  <div style="background:#e8f5e9;border-left:3px solid #2e7d32;padding:6px 14px">
+    ${partidos.map(p => `<div style="display:flex;align-items:center;gap:14px;margin:2px 0">
+      <span style="font-size:13px;font-weight:600;color:#1E3A5F">${p.label}</span>
+      <span style="font-size:15px;font-weight:700;color:#2e7d32;white-space:nowrap">${p.resultado}</span>
+    </div>`).join('')}
   </div>
   <div style="padding:10px 10px 12px">
     <table style="width:100%;border-collapse:collapse">
@@ -434,7 +433,7 @@ async function enviarEmail(partido, resultadoStr, ranking) {
   await transporter.sendMail({
     from: '"Porra 2026 ⚽" <benitocantero72@gmail.com>',
     to: 'benitocantero72@gmail.com',
-    subject: `⚽ ${partido} | ${resultadoStr} — Porra 2026`,
+    subject: `⚽ ${partidos.map(p=>p.label+' '+p.resultado).join(' | ')} — Porra 2026`,
     html,
   });
   console.log('📧 Email enviado a benitocantero72@gmail.com');
