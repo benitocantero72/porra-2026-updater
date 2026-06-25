@@ -163,6 +163,7 @@ async function main() {
   for (const fm of finished) {
     const home = mapTeam(fm.homeTeam.name);
     const away = mapTeam(fm.awayTeam.name);
+    console.log(`  🔍 API partido: "${fm.homeTeam.name}"→"${home}" vs "${fm.awayTeam.name}"→"${away}"`);
     finishedByTeams[`${home}|${away}`] = { fm, home, away };
     finishedByTeams[`${away}|${home}`] = { fm, home, away };
   }
@@ -176,6 +177,24 @@ async function main() {
     if (pending.tipo === 'grupo') {
       found = finishedByTeams[`${pending.loc}|${pending.vis}`]
            || finishedByTeams[`${pending.vis}|${pending.loc}`];
+      // Fallback: búsqueda parcial por si el nombre mapeado difiere ligeramente
+      if (!found) {
+        const loc = pending.loc.toLowerCase();
+        const vis = pending.vis.toLowerCase();
+        for (const [k, v] of Object.entries(finishedByTeams)) {
+          const [h, a] = k.split('|').map(s => s.toLowerCase());
+          if ((h.includes(loc)||loc.includes(h)) && (a.includes(vis)||vis.includes(a))) {
+            found = v;
+            console.warn(`  ⚠ Match parcial: "${pending.loc}"~"${v.home}" vs "${pending.vis}"~"${v.away}"`);
+            break;
+          }
+          if ((h.includes(vis)||vis.includes(h)) && (a.includes(loc)||loc.includes(a))) {
+            found = v;
+            console.warn(`  ⚠ Match parcial inv: "${pending.loc}"~"${v.away}" vs "${pending.vis}"~"${v.home}"`);
+            break;
+          }
+        }
+      }
     } else {
       const r = cuadroReal[pending.key];
       if (r && r.eqL) {
