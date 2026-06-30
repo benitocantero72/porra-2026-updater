@@ -9,7 +9,15 @@
  */
 
 const https  = require('https');
-const { calcPts } = require('./calcPts');
+const { calcPts, calcClasif, buildRC, resolverH, RONDAS } = require('./calcPts');
+
+// Mapa rid -> {lo, vo} para resolver equipos de cada partido eliminatorio
+const HUECOS_BY_RID = {};
+RONDAS.forEach(ronda => {
+  ronda.partidos.forEach(pt => {
+    HUECOS_BY_RID[ronda.key + '_' + pt.id] = { lo: pt.lo, vo: pt.vo };
+  });
+});
 const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore }        = require('firebase-admin/firestore');
 
@@ -100,6 +108,11 @@ async function main() {
   const cuadroReal = { ...(state.cuadroReal  || {}) };
 
   // 2. Encontrar el primer partido sin resultado
+  // Para eliminatorias: resolver los equipos reales con la clasificación actual
+  // (cuadroReal[rid] puede no existir aún si la ronda anterior tampoco se ha guardado)
+  const clR = calcClasif(resultados, state.ordenManualReal || {});
+  const rcR = buildRC(cuadroReal, clR);
+
   let firstPending = null;
   for (const m of ALL_MATCHES) {
     if (m.tipo === 'grupo') {
@@ -107,7 +120,15 @@ async function main() {
       if (!r || r.l === null || r.l === undefined) { firstPending = m; break; }
     } else {
       const r = cuadroReal[m.key];
-      if (r && r.eqL && (r.l === null || r.l === undefined)) { firstPending = m; break; }
+      const yaJugado = r && r.l !== null && r.l !== undefined;
+      if (yaJugado) continue; // este eliminatorio ya tiene resultado, seguir buscando
+      // Resolver si los dos equipos de este partido ya están definidos
+      const huecos = HUECOS_BY_RID[m.key] || HUECOS_BY_RID[m.rid];
+      if (!huecos) { console.warn(`  ⚠ Sin huecos definidos para ${m.key}`); continue; }
+      const eqL = resolverH(huecos.lo, clR, rcR);
+      const eqV = resolverH(huecos.vo, clR, rcR);
+      if (eqL && eqV) { firstPending = { ...m, loc: eqL, vis: eqV }; break; } // los dos equipos se conocen → este partido puede jugarse
+      // si no se conocen ambos equipos, este partido aún no puede jugarse → seguir buscando
     }
   }
 
@@ -126,8 +147,18 @@ async function main() {
       return !r || r.l === null || r.l === undefined;
     } else {
       const r = cuadroReal[m.key];
-      return r && r.eqL && (r.l === null || r.l === undefined);
+      const yaJugado = r && r.l !== null && r.l !== undefined;
+      if (yaJugado) return false;
+      const huecos = HUECOS_BY_RID[m.key] || HUECOS_BY_RID[m.rid];
+      if (!huecos) return false;
+      const eqL = resolverH(huecos.lo, clR, rcR);
+      const eqV = resolverH(huecos.vo, clR, rcR);
+      return !!(eqL && eqV);
     }
+  }).map(m => {
+    if (m.tipo === 'grupo') return m;
+    const huecos = HUECOS_BY_RID[m.key] || HUECOS_BY_RID[m.rid];
+    return { ...m, loc: resolverH(huecos.lo, clR, rcR), vis: resolverH(huecos.vo, clR, rcR) };
   });
 
   console.log(`⏳ ${pendingBatch.length} partido(s) pendiente(s) el ${firstPending.fecha} a las ${firstPending.hora}:`);
@@ -205,10 +236,10 @@ async function main() {
         }
       }
     } else {
-      const r = cuadroReal[pending.key];
-      if (r && r.eqL) {
-        found = finishedByTeams[`${r.eqL}|${r.eqV}`]
-             || finishedByTeams[`${r.eqV}|${r.eqL}`];
+      // pending.loc / pending.vis ya están resueltos (vienen del .map() anterior)
+      if (pending.loc && pending.vis) {
+        found = finishedByTeams[`${pending.loc}|${pending.vis}`]
+             || finishedByTeams[`${pending.vis}|${pending.loc}`];
       }
     }
 
@@ -223,6 +254,7 @@ async function main() {
     const { fm, home, away } = found;
     const homeGoals = fm.score.fullTime.home;
     const awayGoals = fm.score.fullTime.away;
+    console.log(`  📊 Score API: ${found.home} ${homeGoals}-${awayGoals} ${found.away} (status=${fm.status}, halfTime=${fm.score.halfTime?.home}-${fm.score.halfTime?.away})`);
 
     if (pending.tipo === 'grupo') {
       // Determinar cuál equipo de la API es loc y cuál vis
@@ -242,10 +274,9 @@ async function main() {
     } else {
       const penHome = fm.score.penalties?.home ?? null;
       const penAway = fm.score.penalties?.away ?? null;
-      // Identificar cuál equipo de la API es eqL y cuál eqV del cuadro real
-      const r = cuadroReal[pending.key];
-      const eqL = r?.eqL || '';
-      const eqV = r?.eqV || '';
+      // pending.loc / pending.vis ya están resueltos (vienen del .map() anterior)
+      const eqL = pending.loc || (cuadroReal[pending.key]?.eqL) || '';
+      const eqV = pending.vis || (cuadroReal[pending.key]?.eqV) || '';
       const normalOrder   = found.home === eqL && found.away === eqV;
       const invertedOrder = found.home === eqV && found.away === eqL;
       if (!normalOrder && !invertedOrder) {
@@ -262,6 +293,7 @@ async function main() {
                       : null;
       cuadroReal[pending.key] = {
         ...cuadroReal[pending.key],
+        eqL, eqV,
         l: locGoals, v: visGoals,
         pl: locPen, pv: visPen, gan: winner
       };
