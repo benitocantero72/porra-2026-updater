@@ -252,9 +252,11 @@ async function main() {
     }
 
     const { fm, home, away } = found;
+    // fullTime = resultado tras 90 min o 120 min si hubo prórroga (es el marcador del partido)
+    // penalties = tanda de penales aparte, solo decide ganador en empate tras prórroga
     const homeGoals = fm.score.fullTime.home;
     const awayGoals = fm.score.fullTime.away;
-    console.log(`  📊 Score API: ${found.home} ${homeGoals}-${awayGoals} ${found.away} (status=${fm.status}, halfTime=${fm.score.halfTime?.home}-${fm.score.halfTime?.away})`);
+    console.log(`  📊 Score API: ${found.home} ${homeGoals}-${awayGoals} ${found.away} (status=${fm.status}, regularTime=${fm.score.regularTime?.home}-${fm.score.regularTime?.away}, extraTime=${fm.score.extraTime?.home}-${fm.score.extraTime?.away}, penalties=${fm.score.penalties?.home}-${fm.score.penalties?.away})`);
 
     if (pending.tipo === 'grupo') {
       // Determinar cuál equipo de la API es loc y cuál vis
