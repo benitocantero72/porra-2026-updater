@@ -229,4 +229,4 @@ function calcPts(p, state) {
 
 
 // Exportar función principal
-module.exports = { calcPts, calcClasif, buildRC, resolverH };
+module.exports = { calcPts, calcClasif, buildRC, resolverH, RONDAS };
